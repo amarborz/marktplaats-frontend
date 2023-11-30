@@ -1,14 +1,13 @@
 import './App.css'
-import { Header } from './components/Header/Header'
+import NavbarHeader from './components/Navbar/NavbarHeader'
+import HomePagina from './pages/HomePagina'
 
 function App() {
-	const name = 'Amar'
-	const age = 27
-
 	return (
 		<div className="App">
+			<NavbarHeader />
 			<h1>Marktplaats</h1>
-			<Header naam={name} leeftijd={age} />
+			<HomePagina />
 		</div>
 	)
 }

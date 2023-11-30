@@ -2,12 +2,15 @@ import { Button, Form } from 'react-bootstrap'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import logo from '../../utils/images/logo.png'
 
 const NavbarHeader = () => {
 	return (
 		<Navbar expand="lg" className="bg-body-tertiary">
 			<Container className="d-flex justify-content-center">
-				<Navbar.Brand href="#">Marktplaats</Navbar.Brand>
+				<Navbar.Brand href="#">
+					<img src={logo} alt="Logo" style={{ width: '80px' }} />
+				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
 					<Form className="d-flex">

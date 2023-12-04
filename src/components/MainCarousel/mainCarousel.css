@@ -1,0 +1,10 @@
+.carousel-caption {
+	background: rgba(0, 0, 0, 0.35);
+}
+
+.carousel-control-next-icon {
+	background-color: black;
+}
+.carousel-control-prev-icon {
+	background-color: black;
+}

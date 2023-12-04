@@ -2,7 +2,7 @@ import React from 'react'
 import MainCarousel from '../components/MainCarousel/MainCarousel'
 import ProductCard from '../components/ProductCard/ProductCard'
 
-const HomePagina = () => {
+const HomePage = () => {
 	return (
 		<div>
 			<MainCarousel />
@@ -23,4 +23,4 @@ const HomePagina = () => {
 	)
 }
 
-export default HomePagina
+export default HomePage

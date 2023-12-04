@@ -1,13 +1,12 @@
 import './App.css'
 import NavbarHeader from './components/Navbar/NavbarHeader'
-import HomePagina from './pages/HomePagina'
+import HomePage from './pages/HomePage'
 
 function App() {
 	return (
 		<div className="App">
 			<NavbarHeader />
-			<h1>Marktplaats</h1>
-			<HomePagina />
+			<HomePage />
 		</div>
 	)
 }

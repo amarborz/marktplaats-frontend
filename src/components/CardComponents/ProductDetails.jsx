@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 
 const ProductDetails = () => {
   return (
-    <Card style={{ maxWidth: "80rem" }} className="border-0">
+    <Card style={{ maxWidth: "80rem" }} className="border-2">
       <Card.Body className="p-1">
         <Card.Text>
           <b>Display: </b> The laptop features a 15.6-inch Full HD display,

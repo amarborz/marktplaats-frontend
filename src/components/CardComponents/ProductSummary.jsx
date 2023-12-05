@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 
 const ProductSummary = () => {
   return (
-    <Card style={{ maxWidth: "50rem" }} className="border-0">
+    <Card style={{ maxWidth: "50rem" }} className="border-1">
       <Card.Body className="p-5">
         <Card.Subtitle>
           <b>

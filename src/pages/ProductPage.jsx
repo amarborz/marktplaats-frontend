@@ -1,6 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import ProductDetailCard from "../components/ProductDetailCard/ProductDetailCard";
+import ProductSummary from "../components/CardComponents/ProductSummary";
+import ProductImg from "../components/CardComponents/ProductImg";
+import ProductDetails from "../components/CardComponents/ProductDetails";
 
 // Details about 1 product
 
@@ -10,10 +12,15 @@ const ProductPage = () => {
       <h1 className="my-4">Productdetails</h1>
       <Row>
         <Col lg={4}>
-          <ProductDetailCard />
+          <ProductImg />
         </Col>
         <Col lg={6}>
-          {/* Voeg hier andere componenten toe, zoals gerelateerde producten, reviews, etc. */}
+          <ProductSummary />
+        </Col>
+      </Row>
+      <Row>
+        <Col lg={12}>
+          <ProductDetails />
         </Col>
       </Row>
     </Container>

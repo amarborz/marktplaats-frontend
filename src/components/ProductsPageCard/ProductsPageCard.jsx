@@ -1,0 +1,71 @@
+import React from 'react'
+
+import { Card } from 'react-bootstrap'
+
+import laptop from '../../utils/images/laptop.jpg'
+import clothes from '../../utils/images/clothes.webp'
+import books from '../../utils/images/books.webp'
+import electronics from '../../utils/images/electronics.webp'
+import shoppingCart from '../../utils/images/shoppingCart.png'
+
+const path = 'http://localhost:8080/'
+
+const ProductCard = ({ product }) => {
+
+	const addToCart = () => {
+		fetch(`${path}api/item/add_to_cart/${product.id}/1`, {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				"Quantity": 1
+			})
+		})
+	}
+
+	let img = laptop
+	if (product.productType == "Electronica") {
+		img = electronics
+	} else if (product.productType == "Kleding") {
+		img = clothes
+	} else if (product.productType == "boeken") {
+		img = books
+	}
+	return (
+		<Card style={{ maxWidth: '50rem' }} className="border-0 p-4">
+
+			<div style={{ display: 'flex' }}>
+				<div style={{ width: '40%' }}>
+					<Card.Img variant="top" src={img} className="bg-secondary" />
+				</div>
+				<Card.Body style={{ display: 'flex', justifyContent: 'space-between' }}>
+					<div style={{ width: '40%' }}>
+						<Card.Title style={{ fontSize: '1.5rem' }}>
+							{product.productName}
+						</Card.Title>
+						<Card.Subtitle>
+							{product.productDescription}
+						</Card.Subtitle>
+					</div>
+					<div style={{ width: '20%' }}>
+						<Card.Text style={{ color: 'red' }}>
+							${product.price}
+						</Card.Text>
+						<button id='addToCart' onClick={addToCart}
+							style={{ display: 'flex', alignItems: 'center', backgroundColor: 'rgb(255,255,0)', border: '2px solid black' }}>
+							<div style={{ fontSize: '3rem' }}>
+								+
+							</div>
+							<div style={{ width: '3rem' }} v>
+								<Card.Img src={shoppingCart} />
+							</div>
+						</button>
+					</div>
+				</Card.Body>
+			</div >
+		</Card >
+	)
+}
+
+export default ProductCard

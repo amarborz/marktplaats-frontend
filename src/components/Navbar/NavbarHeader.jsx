@@ -7,7 +7,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 const NavbarHeader = () => {
 	return (
-		<Navbar expand="lg" className="bg-body-tertiary">
+		<Navbar expand="lg" className="bg-body-tertiary fixed-top">
 			<Container className="d-flex justify-content-center">
 				<LinkContainer to="/">
 					<Navbar.Brand href="#">

@@ -9,6 +9,7 @@ import electronics from '../../utils/images/electronics.webp'
 import shoppingCart from '../../utils/images/shoppingCart.png'
 
 import settings from '../../Settings'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const path = settings.path
 const userId = settings.userId
@@ -27,9 +28,9 @@ const ProductCard = ({ product }) => {
 						"quantity": "1"
 					})
 				})
-				
+
 			})
-			product.color = 'blue'
+		product.color = 'blue'
 	}
 
 	let img = laptop
@@ -45,7 +46,9 @@ const ProductCard = ({ product }) => {
 
 			<div style={{ display: 'flex' }}>
 				<div style={{ width: '40%' }}>
-					<Card.Img variant="top" src={img} className="bg-secondary" />
+					<LinkContainer to={`/product/${product.id}`}>
+						<Card.Img variant="top" src={img} className="bg-secondary" />
+					</LinkContainer>
 				</div>
 				<Card.Body style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<div style={{ width: '40%' }}>

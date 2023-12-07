@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import ProductSummary from "../components/CardComponents/ProductSummary";
 import ProductImg from "../components/CardComponents/ProductImg";
 import ProductDetails from "../components/CardComponents/ProductDetails";
+import ProductPurchase from "../components/CardComponents/ProductPurchase";
 
 // Details about 1 product
 
@@ -14,8 +15,11 @@ const ProductPage = () => {
         <Col lg={4}>
           <ProductImg />
         </Col>
-        <Col lg={6}>
+        <Col lg={4}>
           <ProductSummary />
+        </Col>
+        <Col lg={4}>
+          <ProductPurchase />
         </Col>
       </Row>
       <Row>

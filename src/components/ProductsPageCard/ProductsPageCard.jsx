@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Card } from 'react-bootstrap'
 
@@ -8,20 +8,29 @@ import books from '../../utils/images/books.webp'
 import electronics from '../../utils/images/electronics.webp'
 import shoppingCart from '../../utils/images/shoppingCart.png'
 
-const path = 'http://localhost:8080/'
+import settings from '../../Settings'
+import { LinkContainer } from 'react-router-bootstrap'
+
+const path = settings.path
+const userId = settings.userId
 
 const ProductCard = ({ product }) => {
-
 	const addToCart = () => {
-		fetch(`${path}api/item/add_to_cart/${product.id}/1`, {
-			method: "POST",
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				"Quantity": 1
+		fetch(`${path}api/shoppingcart/by_user/${userId}`)
+			.then((res) => { return res.json() })
+			.then((data) => {
+				fetch(`${path}api/item/add_to_cart/${product.id}/${data.id}`, {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						"quantity": "1"
+					})
+				})
+
 			})
-		})
+		product.color = 'blue'
 	}
 
 	let img = laptop
@@ -37,7 +46,9 @@ const ProductCard = ({ product }) => {
 
 			<div style={{ display: 'flex' }}>
 				<div style={{ width: '40%' }}>
-					<Card.Img variant="top" src={img} className="bg-secondary" />
+					<LinkContainer to={`/product/${product.id}`}>
+						<Card.Img variant="top" src={img} className="bg-secondary" />
+					</LinkContainer>
 				</div>
 				<Card.Body style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<div style={{ width: '40%' }}>
@@ -53,11 +64,11 @@ const ProductCard = ({ product }) => {
 							${product.price}
 						</Card.Text>
 						<button id='addToCart' onClick={addToCart}
-							style={{ display: 'flex', alignItems: 'center', backgroundColor: 'rgb(255,255,0)', border: '2px solid black' }}>
+							style={{ display: 'flex', alignItems: 'center', backgroundColor: product.color, border: '2px solid yellow', borderRadius: '20px' }}>
 							<div style={{ fontSize: '3rem' }}>
 								+
 							</div>
-							<div style={{ width: '3rem' }} v>
+							<div style={{ width: '4rem' }} v>
 								<Card.Img src={shoppingCart} />
 							</div>
 						</button>

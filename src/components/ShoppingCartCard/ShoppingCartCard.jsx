@@ -15,6 +15,7 @@ const path = settings.path
 
 const ShoppingCartCard = ({ item }) => {
 	const [quantity, setQuantity] = useState(item.quantity);
+	const [isDeleted, setIsDeleted] = useState(false);
 
 	const deleteItem = (itemId) => {
 		fetch(`${path}api/item/${itemId}`, {
@@ -22,9 +23,13 @@ const ShoppingCartCard = ({ item }) => {
 			headers: {
 				'Content-Type': 'application/json',
 			}
+		}).then(() => {
+			console.log("Deleting item: ", itemId)
+			setIsDeleted(true)
 		})
 	}
 	const changeQuantity = (newQuantity, itemId) => {
+		setQuantity(newQuantity);
 		fetch(`${path}api/item/${itemId}`, {
 			method: "PUT",
 			headers: {
@@ -36,11 +41,9 @@ const ShoppingCartCard = ({ item }) => {
 		})
 	}
 
-	useEffect(() => {
-		// Update quantity in local state when item.quantity changes
-		setQuantity(item.quantity);
-	}, [item.quantity]);
-
+	if (isDeleted) {
+		return;
+	  }
 
 	let img = laptop
 	if (item.productType == "Electronica") {
@@ -75,31 +78,33 @@ const ShoppingCartCard = ({ item }) => {
 							${item.price}
 						</Card.Text>
 						<div style={{ display: 'flex', alignItems: 'center', width: '60%' }}>
-						<div style={{ width: '50%' }}>
-							<select
-								id="addToCart"
-								onChange={(e) => {
-									setQuantity(e.target.value);
-									changeQuantity(e.target.value, item.itemId)
-								}}
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									border: '2px solid yellow',
-									borderRadius: '20px',
-									padding: '5px',
-								}}
-								value={quantity}
-							>
-								{[...Array(10).keys()].map((num) => (
-									<option key={num + 1} value={num + 1}>
-										{num + 1}
-									</option>
-								))}
-							</select>
+							<div style={{ width: '50%' }}>
+								<select
+									id="addToCart"
+									onChange={(e) => {
+										changeQuantity(e.target.value, item.itemId)
+									}}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										border: '2px solid yellow',
+										borderRadius: '20px',
+										padding: '5px',
+									}}
+									value={quantity}
+								>
+									{[...Array(10).keys()].map((num) => (
+										<option key={num + 1} value={num + 1}>
+											{num + 1}
+										</option>
+									))}
+								</select>
 							</div>
 							<div>
-								<Card.Img src={trash_bin} onClick={() => deleteItem(item.itemId)}></Card.Img>
+								<Card.Img src={trash_bin} onClick={() => {
+									deleteItem(item.itemId)
+								}}
+								></Card.Img>
 							</div>
 						</div>
 					</div>

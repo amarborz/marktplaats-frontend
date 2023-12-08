@@ -26,6 +26,9 @@ const NavbarHeader = () => {
 						<Button variant="outline-primary">Search</Button>
 					</Form>
 					<Nav className="mr-auto" style={{ maxHeight: '100px' }} navbarScroll>
+						<LinkContainer to="/products">
+							<Nav.Link>Browse all products</Nav.Link>
+						</LinkContainer>
 						<LinkContainer to="/account">
 							<Nav.Link>Account</Nav.Link>
 						</LinkContainer>

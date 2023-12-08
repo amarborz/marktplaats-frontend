@@ -11,6 +11,7 @@ import {
 	WishlistPage,
 	ShoppingCartPage,
 	NewProductPage,
+	CreditCardPage,
 } from './pages'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 				<Route path="/wishlist" element={<WishlistPage />} />
 				<Route path="/shoppingcart" element={<ShoppingCartPage />} />
 				<Route path="/newproduct" element={<NewProductPage />} />
+				<Route path="/payment" element={<CreditCardPage />} />
 			</Routes>
 		</div>
 	)

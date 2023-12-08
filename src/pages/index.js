@@ -6,6 +6,7 @@ import ProductPage from './ProductPage'
 import ProductsPage from './ProductsPage'
 import ShoppingCartPage from './ShoppingCartPage'
 import WishlistPage from './WishlistPage'
+import CreditCardPage from './CreditCardPage'
 
 export {
 	AccountPage,
@@ -16,4 +17,5 @@ export {
 	ProductsPage,
 	ShoppingCartPage,
 	WishlistPage,
+	CreditCardPage,
 }

@@ -15,6 +15,8 @@ const path = settings.path
 const userId = settings.userId
 
 const ProductCard = ({ product }) => {
+
+	const [inCart, setInCart] = useState(false)
 	const addToCart = () => {
 		fetch(`${path}api/shoppingcart/by_user/${userId}`)
 			.then((res) => { return res.json() })
@@ -30,7 +32,8 @@ const ProductCard = ({ product }) => {
 				})
 
 			})
-		product.color = 'blue'
+		product.color = 'blue' 
+		setInCart(true)
 	}
 
 	let img = laptop

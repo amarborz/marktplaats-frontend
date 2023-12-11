@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
 
 import './creditCard.css'
-import {eventListeners} from './creditCardCode'
+import { eventListeners } from './creditCardCode'
 
 const CreditCard = () => {
     useEffect(() => {
         const container = document.getElementById('creditCardContainer');
         eventListeners(container);
-      }, []);
+    }, []);
 
-    return <main id="creditCardContainer">
+    return <div className="creditCardContainer">
 
-        <section id="card" className="card">
+        <section id="creditcard" className="creditcard">
             <div id="highlight"></div>
             <section className="card__front">
                 <div className="card__header">
@@ -19,23 +19,18 @@ const CreditCard = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" height="40" width="60" id="svg895" version="1.1"
                         viewBox="-96 -98.908 832 593.448">
                         <defs id="defs879">
-                            {/* <style id="style877" type="text/css">
-                                .e {{
-                                    fill: '#f79e1b'
-                            }}
-                            </style> */}
                         </defs>
-                        <path id="rect887" display="inline" fill="#ff5f00" stroke-width="5.494"
+                        <path id="rect887" display="inline" fill="#ff5f00" strokeWidth="5.494"
                             d="M224.833 42.298h190.416v311.005H224.833z" />
                         <path id="path889"
                             d="M244.446 197.828a197.448 197.448 0 0175.54-155.475 197.777 197.777 0 100 311.004 197.448 197.448 0 01-75.54-155.53z"
-                            fill="#eb001b" stroke-width="5.494" />
+                            fill="#eb001b" strokeWidth="5.494" />
                         <path id="path891"
                             d="M621.101 320.394v-6.372h2.747v-1.319h-6.537v1.319h2.582v6.373zm12.691 0v-7.69h-1.978l-2.307 5.493-2.308-5.494h-1.977v7.691h1.428v-5.823l2.143 5h1.483l2.143-5v5.823z"
-                            className="e" fill="#f79e1b" stroke-width="5.494" />
+                            className="e" fill="#f79e1b" strokeWidth="5.494" />
                         <path id="path893"
                             d="M640 197.828a197.777 197.777 0 01-320.015 155.474 197.777 197.777 0 000-311.004A197.777 197.777 0 01640 197.773z"
-                            className="e" fill="#f79e1b" stroke-width="5.494" />
+                            className="e" fill="#f79e1b" strokeWidth="5.494" />
                     </svg>
                 </div>
                 <div id="card_number" className="card__number">
@@ -82,18 +77,18 @@ const CreditCard = () => {
 
         <form className="form">
             <div>
-                <label htmlfor="number">Card Number</label>
+                <label className="credit_card_label" htmlFor="number">Card Number</label>
                 <input id="number" type="number" />
             </div>
             <div>
-                <label htmlfor="holder">Card Holder</label>
+                <label className="credit_card_label" htmlFor="holder">Card Holder</label>
                 <input id="holder" type="text" />
             </div>
             <div className="filed__group">
                 <div>
-                    <label htmlfor="expiration_month">Expiration Date</label>
+                    <label className="credit_card_label" htmlFor="expiration_month">Expiration Date</label>
                     <div className="filed__date">
-                        <select id="expiration_month">
+                        <select id="expiration_month_select">
                             <option selected disabled>Month</option>
                             <option>01</option>
                             <option>02</option>
@@ -108,7 +103,7 @@ const CreditCard = () => {
                             <option>11</option>
                             <option>12</option>
                         </select>
-                        <select id="expiration_year">
+                        <select id="expiration_year_select">
                             <option selected disabled>Year</option>
                             <option>2023</option>
                             <option>2024</option>
@@ -124,13 +119,13 @@ const CreditCard = () => {
                     </div>
                 </div>
                 <div>
-                    <label htmlfor="cvv">CVV</label>
+                    <label className="credit_card_label" htmlFor="cvv">CVV</label>
                     <input id="cvv" type="number" />
                 </div>
             </div>
         </form>
-        
-    </main>
+
+    </div>
 }
 
 export default CreditCard

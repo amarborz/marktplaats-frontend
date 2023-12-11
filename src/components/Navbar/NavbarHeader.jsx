@@ -1,9 +1,14 @@
+import './navbarHeader.css'
+
 import { Button, Form } from 'react-bootstrap'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import logo from '../../utils/images/logo.png'
 import { LinkContainer } from 'react-router-bootstrap'
+
+import { FaCartShopping, FaHeart, FaUser, FaPlus } from 'react-icons/fa6'
+
+import logo from '../../utils/images/logo.png'
 
 const NavbarHeader = () => {
 	return (
@@ -29,14 +34,25 @@ const NavbarHeader = () => {
 						<LinkContainer to="/products">
 							<Nav.Link>Browse all products</Nav.Link>
 						</LinkContainer>
+						<LinkContainer to="/newproduct">
+							<Nav.Link>
+								<FaPlus className="icons" />
+							</Nav.Link>
+						</LinkContainer>
 						<LinkContainer to="/account">
-							<Nav.Link>Account</Nav.Link>
+							<Nav.Link>
+								<FaUser className="icons" />
+							</Nav.Link>
 						</LinkContainer>
 						<LinkContainer to="/wishlist">
-							<Nav.Link>Wishlist</Nav.Link>
+							<Nav.Link>
+								<FaHeart className="icons" />
+							</Nav.Link>
 						</LinkContainer>
 						<LinkContainer to="/shoppingcart">
-							<Nav.Link>Shopping Cart</Nav.Link>
+							<Nav.Link>
+								<FaCartShopping className="icons" />
+							</Nav.Link>
 						</LinkContainer>
 					</Nav>
 				</Navbar.Collapse>

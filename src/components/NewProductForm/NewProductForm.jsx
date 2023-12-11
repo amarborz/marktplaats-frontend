@@ -33,13 +33,16 @@ const NewProductForm = () => {
 		console.log('Product Details:', product)
 
 		try {
-			const response = await fetch(`${process.env.REACT_APP_PATH}api/product`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(product),
-			})
+			const response = await fetch(
+				`${process.env.REACT_APP_PATH}api/product/user/1`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(product),
+				}
+			)
 
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`)

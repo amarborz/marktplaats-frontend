@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import ShoppingCartCard from '../ShoppingCartCard/ShoppingCartCard';
+import Checkout from '../Checkout/Checkout'
 
 import settings from '../../Settings'
 
@@ -26,13 +27,21 @@ const ShoppingCartList = () => {
   }, []);
 
   return (
-    <Container className="d-flex align-items-center justify-content-center">
-      <div>
-        {cartItems.map((item) => (
-          <ShoppingCartCard key={item.id} item={item} />
-        ))}
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '10%' }}></div>
+      <div style={{ width: '70%' }}>
+        <Container className="d-flex align-items-center justify-content-center">
+          <div>
+            {cartItems.map((item) => (
+              <ShoppingCartCard key={item.id} item={item} />
+            ))}
+          </div>
+        </Container>
       </div>
-    </Container>
+      <div style={{ width: '20%' }}>
+        <Checkout cartItems={cartItems}/>
+      </div>
+    </div>
   );
 };
 

@@ -19,7 +19,7 @@ const carouselData = [
 
 const MainCarousel = () => {
 	return (
-		<Container className="w-50 d-flex justify-content-center">
+		<Container className="w-50 d-flex justify-content-center mt-5">
 			<Carousel data-bs-theme="white" className="mt-5" indicators={false}>
 				{carouselData.map((data) => {
 					return (

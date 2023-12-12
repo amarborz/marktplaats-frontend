@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
 
 const Checkout = ({cartItems}) => {
-    console.log(cartItems)
-
     const [totalAmount, setTotalAmount] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
   
@@ -15,7 +13,7 @@ const Checkout = ({cartItems}) => {
       setTotalPrice(newTotalPrice);
     }, [cartItems]);
 
-    return <div className='p-5'>
+    return <div className="sticky-top" style={{top: '100px'}}>
         <div>
             Number of items: {totalAmount}
         </div>

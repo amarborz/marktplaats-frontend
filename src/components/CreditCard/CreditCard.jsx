@@ -1,13 +1,63 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Alert, Button, Container, Form } from 'react-bootstrap'
 
 import './creditCard.css'
 import { eventListeners } from './creditCardCode'
 
 const CreditCard = () => {
+
+    const [cardNumber, setCardNumber] = useState('');
+    const [maskedCardNumber, setMaskedCardNumber] = useState('#### #### #### ####');
+
+    const [cardHolder, setCardHolder] = useState('Name');
+
+    const [cardCVV, setCardCVV] = useState('');
+    const [maskedCardCVV, setMaskedCardCVV] = useState('');
+
+    const [expirationMonth, setExpirationMonth] = useState('MM');
+    const [expirationYear, setExpirationYear] = useState('YYYY');
+
     useEffect(() => {
         const container = document.getElementById('creditCardContainer');
         eventListeners(container);
     }, []);
+
+    const handleChangeMonth = (e) => {
+        setExpirationMonth(e.target.value)
+    }
+
+    const handleChangeYear = (e) => {
+        setExpirationYear(e.target.value)
+    }
+
+
+    const handleChangeCardNumber = (e) => {
+        setCardNumber(e.target.value.slice(0, 16));
+
+        const firstFourChars = e.target.value.slice(0, 4);
+        setMaskedCardNumber(
+            (firstFourChars
+                + '*'.repeat(Math.max(0, e.target.value.length - 4))
+                + '#'.repeat(Math.max(0, 16 - e.target.value.length))
+            )
+                .slice(0, 16)
+                .replace(/(.{4})/g, '$1 ')
+
+        )
+    }
+
+    const handleChangeCardHolder = (e) => {
+        setCardHolder(e.target.value);
+    }
+
+    const handleChangeCVV = (e) => {
+        setCardCVV(e.target.value.slice(0, 4))
+        setMaskedCardCVV(Array(e.target.value.length + 1).join("*").slice(0, 4))
+    }
+
+    const handleSubmit = (e) => {
+        console.log(e)
+    }
 
     return <div className="creditCardContainer">
 
@@ -33,35 +83,17 @@ const CreditCard = () => {
                             className="e" fill="#f79e1b" strokeWidth="5.494" />
                     </svg>
                 </div>
-                <div id="card_number" className="card__number">
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-                    <span>#<br /></span>
+                <div id="card_number" className="card__number">{maskedCardNumber}
 
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-                    <span>#<br /></span>
-                    <span>#<br /></span>
                 </div>
                 <div className="card__footer">
                     <div className="card__holder">
                         <div className="card__section__title">Card Holder</div>
-                        <div id="card_holder">Name on card</div>
+                        <div id="card_holder">{cardHolder}</div>
                     </div>
                     <div className="card__expires">
                         <div className="card__section__title">Expires</div>
-                        <span id="card_expires_month">MM</span>/<span id="card_expires_year">YY</span>
+                        <span id="card_expires_month">{expirationMonth}</span>/<span id="card_expires_year">{expirationYear}</span>
                     </div>
                 </div>
             </section>
@@ -70,25 +102,45 @@ const CreditCard = () => {
 
                 <div className="card_cvv">
                     <span>CVV</span>
-                    <div id="card_cvv_field" className="card_cvv_field"></div>
+                    <div id="card_cvv_field" className="card_cvv_field">{maskedCardCVV}</div>
                 </div>
             </section>
         </section>
 
-        <form className="form">
-            <div>
-                <label className="credit_card_label" htmlFor="number">Card Number</label>
-                <input id="number" type="number" />
-            </div>
-            <div>
-                <label className="credit_card_label" htmlFor="holder">Card Holder</label>
-                <input id="holder" type="text" />
-            </div>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group>
+                <Form.Label>Card Number</Form.Label>
+                <Form.Control
+                    id='number'
+                    required
+                    type="number"
+                    placeholder="Card number"
+                    name="number"
+                    value={cardNumber}
+                    onChange={handleChangeCardNumber}
+                />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Card Holder</Form.Label>
+                <Form.Control
+                    id='holder'
+                    required
+                    type="text"
+                    placeholder="Card holder name"
+                    name="holder"
+                    onChange={handleChangeCardHolder}
+                />
+            </Form.Group>
             <div className="filed__group">
-                <div>
-                    <label className="credit_card_label" htmlFor="expiration_month">Expiration Date</label>
+                <Form.Group>
+                    <Form.Label >Expiration Date</Form.Label>
                     <div className="filed__date">
-                        <select id="expiration_month_select">
+                        <Form.Control as="select"
+                            id="expiration_month_select"
+                            defaultValue="Month"
+                            onChange={handleChangeMonth}>
+
                             <option selected disabled>Month</option>
                             <option>01</option>
                             <option>02</option>
@@ -102,8 +154,13 @@ const CreditCard = () => {
                             <option>10</option>
                             <option>11</option>
                             <option>12</option>
-                        </select>
-                        <select id="expiration_year_select">
+                        </Form.Control>
+
+                        <Form.Control as="select"
+                            id="expiration_year_select"
+                            defaultValue="Year"
+                            onChange={handleChangeYear}>
+
                             <option selected disabled>Year</option>
                             <option>2023</option>
                             <option>2024</option>
@@ -115,15 +172,23 @@ const CreditCard = () => {
                             <option>2030</option>
                             <option>2031</option>
                             <option>2032</option>
-                        </select>
+                        </Form.Control>
                     </div>
-                </div>
-                <div>
-                    <label className="credit_card_label" htmlFor="cvv">CVV</label>
-                    <input id="cvv" type="number" />
-                </div>
+                </Form.Group>
+
             </div>
-        </form>
+            <Form.Group controlId="cvv">
+                <Form.Label>CVV</Form.Label>
+                <Form.Control type="number"
+                    required
+                    name="cvv_control"
+                    value={cardCVV}
+                    onChange={handleChangeCVV} />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
 
     </div>
 }

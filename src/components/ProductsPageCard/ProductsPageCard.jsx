@@ -41,9 +41,10 @@ const ProductCard = ({ product }) => {
 		img = electronics
 	} else if (product.productType == "Kleding") {
 		img = clothes
-	} else if (product.productType == "boeken") {
+	} else if (["boeken", "books", "Books"].includes(product.productType)) {
 		img = books
 	}
+
 	return (
 		<Card style={{ maxWidth: '50rem' }} className="border-0 p-4">
 

@@ -10,9 +10,15 @@ const userId = settings.userId
 
 const ShoppingCartList = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [resetCosts, setResetCosts] = useState([true])
+
+  const resetCheckout = () => {
+    setResetCosts(resetCosts == true ? false : true);
+  }
 
   useEffect(() => {
     // Fetch user's shopping cart data
+    console.log("Fetching shopping cart data...");
     fetch(`${path}api/shoppingcart/by_user/${userId}`)
       .then((res) => res.json())
       .then((shoppingCartData) => {
@@ -21,10 +27,10 @@ const ShoppingCartList = () => {
         fetch(`${path}api/item/by_shopping_cart/${shoppingCartData.id}`)
           .then((res) => res.json())
           .then((itemData) => {
-            setCartItems(itemData)
+            setCartItems(itemData);
           });
       });
-  }, []);
+  }, [resetCosts]);
 
   return (
     <div style={{ display: 'flex' }}>
@@ -33,13 +39,13 @@ const ShoppingCartList = () => {
         <Container className="d-flex align-items-center justify-content-center">
           <div>
             {cartItems.map((item) => (
-              <ShoppingCartCard key={item.id} item={item} />
+              <ShoppingCartCard key={item.id} item={item} resetCheckout={resetCheckout}/>
             ))}
           </div>
         </Container>
       </div>
       <div style={{ width: '20%' }}>
-        <Checkout cartItems={cartItems}/>
+        <Checkout cartItems={cartItems} />
       </div>
     </div>
   );

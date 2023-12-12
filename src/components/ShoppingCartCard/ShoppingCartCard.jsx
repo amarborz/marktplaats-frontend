@@ -13,9 +13,10 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 const path = settings.path
 
-const ShoppingCartCard = ({ item }) => {
+const ShoppingCartCard = ({ item , resetCheckout}) => {
 	const [quantity, setQuantity] = useState(item.quantity);
 	const [isDeleted, setIsDeleted] = useState(false);
+
 
 	const deleteItem = (itemId) => {
 		fetch(`${path}api/item/${itemId}`, {
@@ -26,6 +27,7 @@ const ShoppingCartCard = ({ item }) => {
 		}).then(() => {
 			console.log("Deleting item: ", itemId)
 			setIsDeleted(true)
+			resetCheckout()
 		})
 	}
 	const changeQuantity = (newQuantity, itemId) => {
@@ -39,6 +41,7 @@ const ShoppingCartCard = ({ item }) => {
 				"quantity": newQuantity
 			})
 		})
+		resetCheckout()
 	}
 
 	if (isDeleted) {
@@ -50,7 +53,7 @@ const ShoppingCartCard = ({ item }) => {
 		img = electronics
 	} else if (item.productType == "Kleding") {
 		img = clothes
-	} else if (item.productType == "boeken") {
+	} else if (["boeken", "books", "Books"].includes(item.productType)) {
 		img = books
 	}
 	return (

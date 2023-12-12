@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProductSummary from "../components/CardComponents/ProductSummary";
 import ProductImg from "../components/CardComponents/ProductImg";
-import ProductDetails from "../components/CardComponents/ProductDetails";
 import ProductPurchase from "../components/CardComponents/ProductPurchase";
+import ProductDetails from "../components/CardComponents/ProductDetails";
 
 // Details about 1 product
 
 const ProductPage = () => {
+  const [product, setProduct] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(product);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://marktplaatsbackend.azurewebsites.net/api/product/1`
+        );
+        const productResponse = await response.json();
+        setProduct(productResponse);
+      } catch (error) {
+        setProduct("Product is not available.");
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Container>
       <h1 className="my-4">Productdetails</h1>
@@ -15,9 +38,7 @@ const ProductPage = () => {
         <Col lg={4}>
           <ProductImg />
         </Col>
-        <Col lg={4}>
-          <ProductSummary />
-        </Col>
+        <Col lg={4}>{product && <ProductSummary product={product} />}</Col>
         <Col lg={4}>
           <ProductPurchase />
         </Col>

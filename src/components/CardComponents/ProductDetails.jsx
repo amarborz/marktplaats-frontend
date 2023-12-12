@@ -14,18 +14,30 @@ import { Card } from "react-bootstrap";
 
 const ProductDetails = () => {
   return (
-    <Card style={{ maxWidth: "80rem" }} className="border-0">
+    <Card style={{ maxWidth: "50rem" }} className="border-0">
       <Card.Body className="p">
-        <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={display} className="bg-secondary" />
-          <b>Display: </b> The laptop features a 15.6-inch Full HD display,
-          ensuring a crisp and vibrant visual experience. The high resolution of
-          the display is ideal for gaming, multimedia consumption, and
-          productivity tasks.
+        <Card.Text style={{ maxWidth: "50rem", border: "1px solid #000" }}>
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={display}
+            className="bg-secondary"
+          />
+          <b>Display</b>
+          Experience powerful gaming and content creation with our laptop
+          featuring the NVIDIA GeForce RTX 2050 graphics card. Enjoy exceptional
+          graphics performance and real-time ray tracing capabilities for
+          heightened visual realism in supported games and applications. Elevate
+          your gaming and creative pursuits with cutting-edge technology.
         </Card.Text>
 
         <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={processor} className="bg-secondary" />
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={processor}
+            className="bg-secondary"
+          />
           <b>Processor: </b>
           Powered by the AMD Ryzen 5 7535HS processor, the Ideapad Gaming 3
           delivers a balance of performance and efficiency. The Ryzen 5 series
@@ -34,7 +46,12 @@ const ProductDetails = () => {
         </Card.Text>
 
         <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={graphics} className="bg-secondary" />
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={graphics}
+            className="bg-secondary"
+          />
           <b>Graphics: </b>
           Equipped with the NVIDIA GeForce RTX 2050 graphics card, the laptop
           provides excellent graphics performance for gaming and content
@@ -44,7 +61,12 @@ const ProductDetails = () => {
         </Card.Text>
 
         <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={memory} className="bg-secondary" />
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={memory}
+            className="bg-secondary"
+          />
           <b>Memory (RAM): </b>
           The laptop comes with 8GB of RAM, allowing for efficient multitasking
           and smooth operation of applications. While 8GB is suitable for many
@@ -54,7 +76,12 @@ const ProductDetails = () => {
         </Card.Text>
 
         <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={storage} className="bg-secondary" />
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={storage}
+            className="bg-secondary"
+          />
           <b>Storage: </b>
           The Ideapad Gaming 3 boasts a spacious 512GB SSD, providing fast data
           access and quick system boot times. The SSD not only enhances overall
@@ -63,7 +90,12 @@ const ProductDetails = () => {
         </Card.Text>
 
         <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={design} className="bg-secondary" />
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={design}
+            className="bg-secondary"
+          />
           <b>Design: </b>
           The laptop features a sleek and gamer-centric design, with attention
           to cooling for optimal performance during extended gaming sessions.
@@ -72,7 +104,12 @@ const ProductDetails = () => {
         </Card.Text>
 
         <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={wifi} className="bg-secondary" />
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={wifi}
+            className="bg-secondary"
+          />
           <b>Connectivity: </b>
           Multiple connectivity options include USB ports, HDMI, and audio jacks
           for versatile connectivity with peripherals and external devices. The
@@ -82,6 +119,7 @@ const ProductDetails = () => {
 
         <Card.Text style={{ border: "1px solid #000" }}>
           <Card.Img
+            style={{ maxWidth: "5rem" }}
             variant="top"
             src={operatingsystem}
             className="bg-secondary"
@@ -93,7 +131,12 @@ const ProductDetails = () => {
         </Card.Text>
 
         <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={battery} className="bg-secondary" />
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={battery}
+            className="bg-secondary"
+          />
           <b>Battery Life: </b>
           Battery life can vary, but gaming laptops typically have moderate
           battery life due to the demands of high-performance components. Users
@@ -102,7 +145,12 @@ const ProductDetails = () => {
         </Card.Text>
 
         <Card.Text style={{ border: "1px solid #000" }}>
-          <Card.Img variant="top" src={additional} className="bg-secondary" />
+          <Card.Img
+            style={{ maxWidth: "5rem" }}
+            variant="top"
+            src={additional}
+            className="bg-secondary"
+          />
           <b>Additional Features: </b>
           Backlit keyboard: The laptop may feature a backlit keyboard for
           improved visibility in low-light environments. Webcam: A built-in

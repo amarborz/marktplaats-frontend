@@ -13,7 +13,9 @@ const ShoppingCartList = () => {
   const [resetCosts, setResetCosts] = useState([true])
 
   const resetCheckout = () => {
+    
     setResetCosts(resetCosts == true ? false : true);
+    console.log("in resetCheckout....")
   }
 
   useEffect(() => {

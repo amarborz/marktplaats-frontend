@@ -2,25 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Button, Container, Form } from 'react-bootstrap'
 
 import './creditCard.css'
-import { eventListeners } from './creditCardCode'
 
 const CreditCard = () => {
 
     const [cardNumber, setCardNumber] = useState('');
-    const [maskedCardNumber, setMaskedCardNumber] = useState('#### #### #### ####');
-
     const [cardHolder, setCardHolder] = useState('Name');
-
-    const [cardCVV, setCardCVV] = useState('');
-    const [maskedCardCVV, setMaskedCardCVV] = useState('');
-
     const [expirationMonth, setExpirationMonth] = useState('MM');
     const [expirationYear, setExpirationYear] = useState('YYYY');
+    const [cardCVV, setCardCVV] = useState('');
 
-    useEffect(() => {
-        const container = document.getElementById('creditCardContainer');
-        eventListeners(container);
-    }, []);
+    const [maskedCardCVV, setMaskedCardCVV] = useState('');
+    const [maskedCardNumber, setMaskedCardNumber] = useState('#### #### #### ####');
+
+    const [creditCardClass, setCreditCardClass] = useState('');
+    const [highlightClass, setHighlightClass] = useState('');
 
     const handleChangeMonth = (e) => {
         setExpirationMonth(e.target.value)
@@ -29,7 +24,6 @@ const CreditCard = () => {
     const handleChangeYear = (e) => {
         setExpirationYear(e.target.value)
     }
-
 
     const handleChangeCardNumber = (e) => {
         setCardNumber(e.target.value.slice(0, 16));
@@ -59,10 +53,43 @@ const CreditCard = () => {
         console.log(e)
     }
 
+    const handleFocus = (element) => {
+        if (element == "number" || element == "holder" || element == "month" || element == "year" || element == "cvv_out") {
+            setCreditCardClass("creditcard")
+        } else if (element == "cvv") {
+            setCreditCardClass("creditcard flip")
+        }
+
+        switch (element) {
+            case "number":
+                setHighlightClass("highlight__number")
+                break;
+            case "holder":
+                setHighlightClass("highlight__holder")
+                break;
+            case "month":
+                setHighlightClass("highlight__expire")
+                break;
+            case "year":
+                setHighlightClass("highlight__expire")
+                break;
+            case "cvv":
+                setHighlightClass("highlight__cvv")
+                break;
+            case "cvv_out":
+                setHighlightClass("hidden")
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
     return <div className="creditCardContainer">
 
-        <section id="creditcard" className="creditcard">
-            <div id="highlight"></div>
+        <section id="creditcard" className={creditCardClass}>
+            <div id="highlight" className={highlightClass}></div>
             <section className="card__front">
                 <div className="card__header">
                     <div>CreditCard</div>
@@ -118,6 +145,7 @@ const CreditCard = () => {
                     name="number"
                     value={cardNumber}
                     onChange={handleChangeCardNumber}
+                    onFocus={() => handleFocus("number")}
                 />
             </Form.Group>
 
@@ -130,6 +158,7 @@ const CreditCard = () => {
                     placeholder="Card holder name"
                     name="holder"
                     onChange={handleChangeCardHolder}
+                    onFocus={() => handleFocus("holder")}
                 />
             </Form.Group>
             <div className="filed__group">
@@ -139,39 +168,26 @@ const CreditCard = () => {
                         <Form.Control as="select"
                             id="expiration_month_select"
                             defaultValue="Month"
-                            onChange={handleChangeMonth}>
+                            onChange={handleChangeMonth}
+                            onFocus={() => handleFocus("month")}>
 
                             <option selected disabled>Month</option>
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                            <option>04</option>
-                            <option>05</option>
-                            <option>06</option>
-                            <option>07</option>
-                            <option>08</option>
-                            <option>09</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
+                            {Array.from({ length: 12 }, (_, index) => (
+                                <option key={index + 1}>{String(index + 1).padStart(2, '0')}</option>
+                            ))}
                         </Form.Control>
 
                         <Form.Control as="select"
                             id="expiration_year_select"
                             defaultValue="Year"
-                            onChange={handleChangeYear}>
+                            onChange={handleChangeYear}
+                            onFocus={() => handleFocus("year")}>
+
 
                             <option selected disabled>Year</option>
-                            <option>2023</option>
-                            <option>2024</option>
-                            <option>2025</option>
-                            <option>2026</option>
-                            <option>2027</option>
-                            <option>2028</option>
-                            <option>2029</option>
-                            <option>2030</option>
-                            <option>2031</option>
-                            <option>2032</option>
+                            {Array.from({ length: 10 }, (_, index) => (
+                                <option key={index + 2023}>{index + 2023}</option>
+                            ))}
                         </Form.Control>
                     </div>
                 </Form.Group>
@@ -183,7 +199,10 @@ const CreditCard = () => {
                     required
                     name="cvv_control"
                     value={cardCVV}
-                    onChange={handleChangeCVV} />
+                    onChange={handleChangeCVV}
+                    onFocus={() => handleFocus("cvv")}
+                    onBlur={() => handleFocus("cvv_out")}
+                />
             </Form.Group>
             <Button variant="primary" type="submit">
                 Submit

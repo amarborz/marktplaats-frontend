@@ -15,7 +15,6 @@ const path = settings.path
 
 const ShoppingCartCard = ({ item , resetCheckout}) => {
 	const [quantity, setQuantity] = useState(item.quantity);
-	const [isDeleted, setIsDeleted] = useState(false);
 
 
 	const deleteItem = (itemId) => {
@@ -26,7 +25,7 @@ const ShoppingCartCard = ({ item , resetCheckout}) => {
 			}
 		}).then(() => {
 			console.log("Deleting item: ", itemId)
-			setIsDeleted(true)
+			// setIsDeleted(true)
 			resetCheckout()
 		})
 	}
@@ -43,10 +42,6 @@ const ShoppingCartCard = ({ item , resetCheckout}) => {
 		})
 		resetCheckout()
 	}
-
-	if (isDeleted) {
-		return;
-	  }
 
 	let img = laptop
 	if (item.productType == "Electronica") {
@@ -96,7 +91,7 @@ const ShoppingCartCard = ({ item , resetCheckout}) => {
 									}}
 									value={quantity}
 								>
-									{[...Array(10).keys()].map((num) => (
+									{[...Array(100).keys()].map((num) => (
 										<option key={num + 1} value={num + 1}>
 											{num + 1}
 										</option>

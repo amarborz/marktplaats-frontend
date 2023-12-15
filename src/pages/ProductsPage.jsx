@@ -9,7 +9,7 @@ const ProductsPage = () => {
 	if (url === undefined) {
 		url = '/product'
 	} else {
-		url = `/product/url`
+		url = `/product/search_name/${url}`
 	}
 	console.log("url after", url)
 	return <div style={{backgroundColor: "rgb(245,245,245,1)"}} className='p-5'>

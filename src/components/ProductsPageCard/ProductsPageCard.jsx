@@ -36,7 +36,8 @@ const ProductCard = ({ product }) => {
 		setInCart(true)
 	}
 
-	console.log(inCart)
+	// console.log("item", product.id, " in cart", inCart)
+
 	let img = laptop
 	if (product.productType === "Electronica") {
 		img = electronics

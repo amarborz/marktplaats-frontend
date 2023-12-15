@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-
+import { useNavigate, useLocation } from "react-router-dom"
 import './creditCard.css'
 
 const CreditCard = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const totalPrice = searchParams.get('totalPrice');
 
     const [cardNumber, setCardNumber] = useState('');
     const [cardHolder, setCardHolder] = useState('Name');
@@ -36,7 +40,6 @@ const CreditCard = () => {
             )
                 .slice(0, 16)
                 .replace(/(.{4})/g, '$1 ')
-
         )
     }
 
@@ -50,7 +53,37 @@ const CreditCard = () => {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault()
         console.log(e)
+
+        let user_id = 1
+        let order = {
+            "totalPayment": totalPrice,
+            "deliveryAddress": "Straat 1",
+            "deliveryDate": "2023-12-18",
+            "paymentDate": "2023-12-15",
+            "paymentMethod": "Credit Card",
+            "status": "Processing"
+        }
+        fetch(`${process.env.REACT_APP_PATH}api/order/user/${user_id}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order)
+        })
+            .then((res) => {
+                console.log(res)
+                if (res.ok) {
+                    fetch(`${process.env.REACT_APP_PATH}api/item/empty_cart/${user_id}`, {
+                        method: "DELETE",
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    })
+                }
+            })
+            navigate(`/orders`)
     }
 
     const handleFocus = (element) => {
@@ -166,6 +199,7 @@ const CreditCard = () => {
                     <Form.Label >Expiration Date</Form.Label>
                     <div className="filed__date">
                         <Form.Control as="select"
+                            required
                             id="expiration_month_select"
                             defaultValue="Month"
                             onChange={handleChangeMonth}
@@ -178,6 +212,7 @@ const CreditCard = () => {
                         </Form.Control>
 
                         <Form.Control as="select"
+                            required
                             id="expiration_year_select"
                             defaultValue="Year"
                             onChange={handleChangeYear}

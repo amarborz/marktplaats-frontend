@@ -12,7 +12,9 @@ const HomeProducts = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
+			console.log("path: ", process.env.REACT_APP_PATH)
 			try {
+				console.log("path: ", process.env.REACT_APP_PATH)
 				const response = await fetch(`${process.env.REACT_APP_PATH}api/product`)
 				const products = await response.json()
 				setLatestProducts(products.slice(-10))

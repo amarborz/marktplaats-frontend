@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 
 import { Card } from 'react-bootstrap'
 
@@ -13,9 +13,9 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 const path = settings.path
 
-const ShoppingCartCard = ({ item }) => {
+const ShoppingCartCard = ({ item , resetCheckout}) => {
 	const [quantity, setQuantity] = useState(item.quantity);
-	const [isDeleted, setIsDeleted] = useState(false);
+
 
 	const deleteItem = (itemId) => {
 		fetch(`${path}api/item/${itemId}`, {
@@ -25,7 +25,8 @@ const ShoppingCartCard = ({ item }) => {
 			}
 		}).then(() => {
 			console.log("Deleting item: ", itemId)
-			setIsDeleted(true)
+			// setIsDeleted(true)
+			resetCheckout()
 		})
 	}
 	const changeQuantity = (newQuantity, itemId) => {
@@ -39,18 +40,15 @@ const ShoppingCartCard = ({ item }) => {
 				"quantity": newQuantity
 			})
 		})
+		resetCheckout()
 	}
 
-	if (isDeleted) {
-		return;
-	  }
-
 	let img = laptop
-	if (item.productType == "Electronica") {
+	if (item.productType === "Electronica") {
 		img = electronics
-	} else if (item.productType == "Kleding") {
+	} else if (item.productType === "Kleding") {
 		img = clothes
-	} else if (item.productType == "boeken") {
+	} else if (["boeken", "books", "Books"].includes(item.productType)) {
 		img = books
 	}
 	return (
@@ -93,7 +91,7 @@ const ShoppingCartCard = ({ item }) => {
 									}}
 									value={quantity}
 								>
-									{[...Array(10).keys()].map((num) => (
+									{[...Array(100).keys()].map((num) => (
 										<option key={num + 1} value={num + 1}>
 											{num + 1}
 										</option>

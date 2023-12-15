@@ -1,44 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import settings from '../../Settings'
 import { LinkContainer } from 'react-router-bootstrap'
 
-const path = settings.path
-const userId = settings.userId
+const Checkout = ({cartItems}) => {
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+  
+    useEffect(() => {
+      const newTotalAmount = cartItems.reduce((amount, product) => amount + product.quantity, 0);
+      const newTotalPrice = cartItems.reduce((price, product) => price + product.quantity * product.price, 0);
+  
+      setTotalAmount(newTotalAmount);
+      setTotalPrice(newTotalPrice);
+    }, [cartItems]);
 
-const Checkout = () => {
-
-    const products = [
-        {
-            name: "sokken",
-            quantity: 3,
-            price: 10
-        },
-        {
-            name: "tv",
-            quantity: 5,
-            price: 500
-        },
-    ]
-    let totalAmount = products.reduce((amount, product) => {
-        return amount + product.quantity
-    }, 0)
-
-    let totalPrice = products.reduce((price, product) => {
-        return price + (product.quantity * product.price)
-    }, 0)
-
-    return <div className='p-5'>
+    return <div className="sticky-top" style={{top: '100px'}}>
         <div>
-            Items: {totalAmount}
+            Number of items: {totalAmount}
         </div>
         <div>
-            Items: {totalPrice}
+            Price of items: {totalPrice}
         </div>
         <div>
             Delivery costs: {totalPrice >= 20 ? 0 : 3.50}
         </div>
         <LinkContainer to='/payment'>
-            <button style={{backgroundColor: 'blue'}}>
+            <button style={{ backgroundColor: 'blue' }}>
                 Checkout
             </button>
         </LinkContainer>

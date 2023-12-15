@@ -1,16 +1,36 @@
 import './navbarHeader.css'
 
+import { useState, } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useNavigate } from "react-router-dom"
 
 import { FaCartShopping, FaHeart, FaUser, FaPlus } from 'react-icons/fa6'
 
 import logo from '../../utils/images/logo.png'
 
 const NavbarHeader = () => {
+
+	const navigate = useNavigate();
+
+	const [searchName, setSearchName] = useState('')
+	// const [searchType, setSearchType] = useState()
+
+	const searchFunction = () => {
+		
+		let url
+		if (searchName === undefined) {
+			url = `/products`
+		} else {
+			url = `/products/${searchName}`
+		}
+		console.log("moving to", `/products/${searchName}`)
+		navigate(url)
+	}
+
 	return (
 		<Navbar expand="lg" className="bg-body-tertiary fixed-top">
 			<Container className="d-flex justify-content-center">
@@ -27,8 +47,14 @@ const NavbarHeader = () => {
 							placeholder="Search for..."
 							className=""
 							aria-label="Search"
+							onChange={(e) => setSearchName(e.target.value)}
+							value={searchName}
 						/>
-						<Button variant="outline-primary">Search</Button>
+						<Button
+							variant="outline-primary"
+							onClick={searchFunction}>
+							Search
+						</Button>
 					</Form>
 					<Nav className="mr-auto" style={{ maxHeight: '100px' }} navbarScroll>
 						<LinkContainer to="/products">
@@ -52,6 +78,11 @@ const NavbarHeader = () => {
 						<LinkContainer to="/shoppingcart">
 							<Nav.Link>
 								<FaCartShopping className="icons" />
+							</Nav.Link>
+						</LinkContainer>
+						<LinkContainer to="/orders">
+							<Nav.Link>
+								Orders
 							</Nav.Link>
 						</LinkContainer>
 					</Nav>

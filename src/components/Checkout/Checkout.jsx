@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
 
 const Checkout = ({cartItems}) => {

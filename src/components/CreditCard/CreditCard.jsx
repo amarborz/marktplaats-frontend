@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, Button, Container, Form } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Button, Form } from 'react-bootstrap'
 
 import './creditCard.css'
 
@@ -54,9 +54,9 @@ const CreditCard = () => {
     }
 
     const handleFocus = (element) => {
-        if (element == "number" || element == "holder" || element == "month" || element == "year" || element == "cvv_out") {
+        if (element === "number" || element === "holder" || element === "month" || element === "year" || element === "cvv_out") {
             setCreditCardClass("creditcard")
-        } else if (element == "cvv") {
+        } else if (element === "cvv") {
             setCreditCardClass("creditcard flip")
         }
 

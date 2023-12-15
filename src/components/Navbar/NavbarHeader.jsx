@@ -17,12 +17,12 @@ const NavbarHeader = () => {
 	const navigate = useNavigate();
 
 	const [searchName, setSearchName] = useState('')
-	const [searchType, setSearchType] = useState()
+	// const [searchType, setSearchType] = useState()
 
 	const searchFunction = () => {
 		
 		let url
-		if (searchName == undefined) {
+		if (searchName === undefined) {
 			url = `/products`
 		} else {
 			url = `/products/${searchName}`

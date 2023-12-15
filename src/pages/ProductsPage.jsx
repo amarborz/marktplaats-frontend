@@ -6,7 +6,7 @@ import ProductList from '../components/ProductsPageList/ProductsPageList'
 const ProductsPage = () => {
 	let { url } = useParams();
 	console.log("url before", url)
-	if (url == undefined) {
+	if (url === undefined) {
 		url = '/product'
 	} else {
 		url = `/product/url`

@@ -14,7 +14,7 @@ const ShoppingCartList = () => {
 
   const resetCheckout = () => {
     
-    setResetCosts(resetCosts == true ? false : true);
+    setResetCosts(resetCosts === true ? false : true);
     console.log("in resetCheckout....")
   }
 

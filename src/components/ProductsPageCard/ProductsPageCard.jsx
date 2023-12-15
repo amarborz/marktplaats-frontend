@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { Card } from 'react-bootstrap'
 
@@ -32,14 +32,15 @@ const ProductCard = ({ product }) => {
 				})
 
 			})
-		product.color = 'blue' 
+		product.color = 'blue'
 		setInCart(true)
 	}
 
+	console.log(inCart)
 	let img = laptop
-	if (product.productType == "Electronica") {
+	if (product.productType === "Electronica") {
 		img = electronics
-	} else if (product.productType == "Kleding") {
+	} else if (product.productType === "Kleding") {
 		img = clothes
 	} else if (["boeken", "books", "Books"].includes(product.productType)) {
 		img = books

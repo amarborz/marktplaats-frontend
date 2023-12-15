@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 
 import { Card } from 'react-bootstrap'
 
@@ -44,9 +44,9 @@ const ShoppingCartCard = ({ item , resetCheckout}) => {
 	}
 
 	let img = laptop
-	if (item.productType == "Electronica") {
+	if (item.productType === "Electronica") {
 		img = electronics
-	} else if (item.productType == "Kleding") {
+	} else if (item.productType === "Kleding") {
 		img = clothes
 	} else if (["boeken", "books", "Books"].includes(item.productType)) {
 		img = books

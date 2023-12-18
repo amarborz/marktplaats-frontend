@@ -6,50 +6,63 @@ import laptop from '../../utils/images/laptop.jpg'
 import clothes from '../../utils/images/clothes.webp'
 import books from '../../utils/images/books.webp'
 import electronics from '../../utils/images/electronics.webp'
-import shoppingCart from '../../utils/images/shoppingCart.png'
+
+import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 
 import settings from '../../Settings'
+
 import { LinkContainer } from 'react-router-bootstrap'
 
 const path = settings.path
 const userId = settings.userId
 
 const ProductCard = ({ product }) => {
-
 	const [inCart, setInCart] = useState(false)
 	const addToCart = () => {
 		fetch(`${path}api/shoppingcart/by_user/${userId}`)
-			.then((res) => { return res.json() })
+			.then((res) => {
+				return res.json()
+			})
 			.then((data) => {
 				fetch(`${path}api/item/add_to_cart/${product.id}/${data.id}`, {
-					method: "POST",
+					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
 					},
 					body: JSON.stringify({
-						"quantity": "1"
-					})
+						quantity: '1',
+					}),
 				})
-
 			})
-		product.color = 'blue'
+		product.color = 'grey'
 		setInCart(true)
 	}
 
-	// console.log("item", product.id, " in cart", inCart)
+	const saveToLocalStorage = (product) => {
+		// Key for the data in local storage
+		const storageKey = 'myWishlist'
+
+		// Retrieve existing data from local storage
+		const existingData = JSON.parse(localStorage.getItem(storageKey)) || []
+
+		// Add new information
+		existingData.push(product)
+
+		// Save back to local storage
+		localStorage.setItem(storageKey, JSON.stringify(existingData))
+	}
 
 	let img = laptop
-	if (product.productType === "Electronica") {
+	if (product.productType === 'Electronica') {
 		img = electronics
-	} else if (product.productType === "Kleding") {
+	} else if (product.productType === 'Kleding') {
 		img = clothes
-	} else if (["boeken", "books", "Books"].includes(product.productType)) {
+	} else if (['boeken', 'books', 'Books'].includes(product.productType)) {
 		img = books
 	}
 
 	return (
 		<Card style={{ maxWidth: '50rem' }} className="border-0 p-4">
-
 			<div style={{ display: 'flex' }}>
 				<div style={{ width: '40%' }}>
 					<LinkContainer to={`/product/${product.id}`}>
@@ -61,27 +74,67 @@ const ProductCard = ({ product }) => {
 						<Card.Title style={{ fontSize: '1.5rem' }}>
 							{product.productName}
 						</Card.Title>
-						<Card.Subtitle>
-							{product.productDescription}
-						</Card.Subtitle>
+						<Card.Subtitle>{product.productDescription}</Card.Subtitle>
 					</div>
-					<div style={{ width: '20%' }}>
-						<Card.Text style={{ color: 'red' }}>
-							${product.price}
-						</Card.Text>
-						<button id='addToCart' onClick={addToCart}
-							style={{ display: 'flex', alignItems: 'center', backgroundColor: product.color, border: '2px solid yellow', borderRadius: '20px' }}>
-							<div style={{ fontSize: '3rem' }}>
-								+
+					<div style={{ width: '20%', justifyContent: 'center' }}>
+						<Card.Text style={{ color: 'red' }}>${product.price}</Card.Text>
+						<button
+							id="addToCart"
+							title={
+								product.color === 'grey'
+									? 'Already added to your shopping cart'
+									: 'Add to your shopping cart'
+							}
+							onClick={addToCart}
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+								backgroundColor: product.color,
+								border: '2px solid black',
+								borderRadius: '10px',
+							}}
+							disabled={product.color === 'grey'}
+						>
+							<div style={{ fontSize: '1rem' }}>+</div>
+							<div
+								style={{ width: '2rem', color: 'black', fontSize: '1.5rem' }}
+							>
+								<FaCartShopping />
 							</div>
-							<div style={{ width: '4rem' }} v>
-								<Card.Img src={shoppingCart} />
+						</button>
+						<button
+							id="addToCart"
+							title={
+								product.color === 'grey'
+									? 'Already added to your wishlist'
+									: 'Add to your wishlist'
+							}
+							onClick={saveToLocalStorage(product)}
+							style={{
+								// 	display: 'flex',
+								// 	alignItems: 'center',
+								backgroundColor: 'white',
+								border: 'none',
+								margin: 'auto',
+								// 	borderRadius: '10px',
+							}}
+							// disabled={product.color === 'grey'}
+						>
+							{/* <div style={{ fontSize: '1rem' }}>+</div> */}
+							<div
+								style={{
+									width: '2rem',
+									color: 'red',
+									fontSize: '1.5rem',
+								}}
+							>
+								<FaHeart />
 							</div>
 						</button>
 					</div>
 				</Card.Body>
-			</div >
-		</Card >
+			</div>
+		</Card>
 	)
 }
 

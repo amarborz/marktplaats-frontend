@@ -12,9 +12,9 @@ const HomeProducts = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			console.log("path: ", process.env.REACT_APP_PATH)
+			console.log('path: ', process.env.REACT_APP_PATH)
 			try {
-				console.log("path: ", process.env.REACT_APP_PATH)
+				console.log('path: ', process.env.REACT_APP_PATH)
 				const response = await fetch(`${process.env.REACT_APP_PATH}api/product`)
 				const products = await response.json()
 				setLatestProducts(products.slice(-10))
@@ -33,7 +33,10 @@ const HomeProducts = () => {
 		<div style={{ marginTop: '60px', textAlign: 'center' }}>
 			<h4>Latest Products:</h4>
 			{isLoading && <Spinner animation="border" className="mt-5" />}
-			<CardGroup className="mx-5 justify-content-center">
+			<CardGroup
+				className="justify-content-center m-auto"
+				style={{ maxWidth: 1200 }}
+			>
 				{latestProducts &&
 					latestProducts.map((product) => {
 						return <ProductCard data={product} key={product.id} />

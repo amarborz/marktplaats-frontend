@@ -12,24 +12,32 @@ import processor from "../../utils/images/Processor.jpg";
 
 import { Card } from "react-bootstrap";
 
-const ProductDetails = () => {
+const ProductDetails = ({ product }) => {
   return (
     <Card style={{ maxWidth: "50rem" }} className="border-0">
       <Card.Body className="p">
-        <Card.Text style={{ maxWidth: "50rem", border: "1px solid #000" }}>
-          <Card.Img
-            style={{ maxWidth: "5rem" }}
-            variant="top"
-            src={display}
-            className="bg-secondary"
-          />
-          <b>Display</b>
-          Experience powerful gaming and content creation with our laptop
-          featuring the NVIDIA GeForce RTX 2050 graphics card. Enjoy exceptional
-          graphics performance and real-time ray tracing capabilities for
-          heightened visual realism in supported games and applications. Elevate
-          your gaming and creative pursuits with cutting-edge technology.
-        </Card.Text>
+        {[product.propertyName].map((name, index) => {
+          return (
+            <div>
+              {console.log(name[index])}
+              <Card.Text>{name[index]}</Card.Text>
+            </div>
+          );
+        })}
+
+        {[product.propertyValue].map((name) => {
+          return (
+            <Card.Text>
+              {name}
+              <Card.Img
+                style={{ maxWidth: "5rem" }}
+                variant="top"
+                src={display}
+                className="bg-secondary"
+              />
+            </Card.Text>
+          );
+        })}
 
         <Card.Text style={{ border: "1px solid #000" }}>
           <Card.Img

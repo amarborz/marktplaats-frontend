@@ -44,9 +44,7 @@ const ProductPage = () => {
         </Col>
       </Row>
       <Row>
-        <Col lg={12}>
-          <ProductDetails />
-        </Col>
+        <Col lg={12}>{product && <ProductDetails product={product} />}</Col>
       </Row>
     </Container>
   );

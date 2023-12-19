@@ -39,16 +39,15 @@ const ProductCard = ({ product }) => {
 	}
 
 	const saveToLocalStorage = (product) => {
-		// Key for the data in local storage
 		const storageKey = 'myWishlist'
 
-		// Retrieve existing data from local storage
 		const existingData = JSON.parse(localStorage.getItem(storageKey)) || []
 
-		// Add new information
-		existingData.push(product)
+		const newProductId = product.id
+		const alreadyInList = existingData.some((item) => item.id === newProductId)
 
-		// Save back to local storage
+		if (!alreadyInList) existingData.push(product)
+
 		localStorage.setItem(storageKey, JSON.stringify(existingData))
 	}
 
@@ -109,7 +108,7 @@ const ProductCard = ({ product }) => {
 									? 'Already added to your wishlist'
 									: 'Add to your wishlist'
 							}
-							onClick={saveToLocalStorage(product)}
+							onClick={() => saveToLocalStorage(product)}
 							style={{
 								// 	display: 'flex',
 								// 	alignItems: 'center',

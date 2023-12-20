@@ -1,24 +1,15 @@
 import React from 'react'
+
 import MainCarousel from '../components/MainCarousel/MainCarousel'
-import ProductCard from '../components/ProductCard/ProductCard'
+import HomeCategories from '../components/HomeCategories/HomeCategories'
+import HomeProducts from '../components/HomeProducts/HomeProducts'
 
 const HomePage = () => {
 	return (
 		<div>
 			<MainCarousel />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
-			<ProductCard />
+			<HomeProducts />
+			<HomeCategories />
 		</div>
 	)
 }

@@ -1,16 +1,28 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProductSummary from "../components/CardComponents/ProductSummary";
 import ProductImg from "../components/CardComponents/ProductImg";
 import ProductPurchase from "../components/CardComponents/ProductPurchase";
 import ProductDetails from "../components/CardComponents/ProductDetails";
+=======
+import React from 'react'
+import { useParams } from 'react-router-dom'
+>>>>>>> main
 
 // Details about 1 product
 
 const ProductPage = () => {
+<<<<<<< HEAD
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   console.log(product);
+=======
+	const { productId } = useParams();
+	console.log(productId)
+	return <div>ProductPage: {productId}</div>
+}
+>>>>>>> main
 
   useEffect(() => {
     const fetchData = async () => {

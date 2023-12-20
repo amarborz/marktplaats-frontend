@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Card } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
@@ -8,21 +8,15 @@ import books from '../../utils/images/books.webp'
 import electronics from '../../utils/images/electronics.webp'
 
 const OrderCard = ({ orderedItem }) => {
-    let item = orderedItem
-    console.log(item)
-    let img = laptop
-	if (item.productType === "Electronica") {
-		img = electronics
-	} else if (item.productType === "Kleding") {
-		img = clothes
-	} else if (["boeken", "books", "Books"].includes(item.productType)) {
-		img = books
-	}
+	let item = orderedItem
+	let img = item.productType === "Electronica" ? electronics :
+		(item.productType === "Kleding" ? clothes :
+			(["boeken", "books", "Books"].includes(item.productType) ? books : laptop))
 
-    return (
-        <Card style={{ maxWidth: '50rem' }} className="border-0 p-4">
-            <div style={{ display: 'flex' }}>
-				<div style={{ width: '40%' }}>
+	return (
+		<Card style={{ maxWidth: '40rem' }} className="border-0 p-4">
+			<div style={{ display: 'flex' }}>
+				<div style={{ width: '30%' }}>
 					<LinkContainer to={`/product/${item.productId}`}>
 						<Card.Img variant="top" src={img} className="bg-secondary" />
 					</LinkContainer>
@@ -38,13 +32,16 @@ const OrderCard = ({ orderedItem }) => {
 					</div>
 					<div style={{ width: '20%' }}>
 						<Card.Text style={{ color: 'red' }}>
-							${item.price}
+							Price: ${item.price}
+						</Card.Text>
+						<Card.Text style={{ color: 'blue' }}>
+							Amount: {item.quantity}
 						</Card.Text>
 					</div>
 				</Card.Body>
-			</div >
-        </Card>
-    )
+			</div>
+		</Card>
+	)
 }
 
 export default OrderCard

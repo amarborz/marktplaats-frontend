@@ -7,7 +7,7 @@ import settings from '../../Settings'
 const path = settings.path
 const userId = settings.userId
 
-const ProductList = ({ searchName }) => {
+const ProductsPageList = ({ searchName }) => {
 	const [products, setProducts] = useState([])
 	console.log(`${path}api${searchName}`)
 	console.log(products)
@@ -52,4 +52,4 @@ const ProductList = ({ searchName }) => {
 	)
 }
 
-export default ProductList
+export default ProductsPageList

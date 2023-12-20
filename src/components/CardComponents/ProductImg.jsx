@@ -1,15 +1,19 @@
-import React from "react";
+import React from 'react'
 
-import laptop from "../../utils/images/laptop.jpg";
+import laptop from '../../utils/images/laptop.jpg'
 
-import { Card } from "react-bootstrap";
+import { Card } from 'react-bootstrap'
 
-const ProductImg = () => {
-  return (
-    <Card style={{ maxWidth: "50rem" }} className="border-0">
-      <Card.Img variant="top" src={laptop} className="bg-secondary" />
-    </Card>
-  );
-};
+const ProductImg = ({ fotos }) => {
+	return (
+		<Card style={{ maxWidth: '50rem' }} className="border-0">
+			<Card.Img
+				variant="top"
+				src={fotos ? fotos[0] : laptop}
+				className="bg-secondary"
+			/>
+		</Card>
+	)
+}
 
-export default ProductImg;
+export default ProductImg

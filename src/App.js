@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import "./App.css";
-import NavbarHeader from "./components/Navbar/NavbarHeader";
-import HomePage from "./pages/HomePage";
-import ProductPage from "./pages/ProductPage";
-
-function App() {
-  return (
-    <div className="App">
-      <NavbarHeader />
-      <ProductPage />
-    </div>
-  );
-=======
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import NavbarHeader from './components/Navbar/NavbarHeader'
@@ -46,7 +32,6 @@ function App() {
 			</Routes>
 		</div>
 	)
->>>>>>> main
 }
 
-export default App;
+export default App

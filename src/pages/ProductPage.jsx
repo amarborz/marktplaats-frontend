@@ -4,10 +4,12 @@ import ProductSummary from '../components/CardComponents/ProductSummary'
 import ProductImg from '../components/CardComponents/ProductImg'
 import ProductPurchase from '../components/CardComponents/ProductPurchase'
 import ProductDetails from '../components/CardComponents/ProductDetails'
+import { useParams } from 'react-router'
 
 // Details about 1 product
 
 const ProductPage = () => {
+	let { productId } = useParams()
 	const [product, setProduct] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	console.log(product)
@@ -16,7 +18,7 @@ const ProductPage = () => {
 		const fetchData = async () => {
 			try {
 				const response = await fetch(
-					`https://marktplaatsbackend.azurewebsites.net/api/product/1`
+					`https://marktplaatsbackend.azurewebsites.net/api/product/${productId}`
 				)
 				const productResponse = await response.json()
 				setProduct(productResponse)
@@ -29,14 +31,14 @@ const ProductPage = () => {
 		}
 
 		fetchData()
-	}, [])
+	}, [productId])
 
 	return (
-		<Container>
-			<h1 className="my-4">Productdetails</h1>
+		<Container style={{ marginTop: 100 }}>
+			<h1 className="my-5">Productdetails</h1>
 			<Row>
 				<Col lg={4}>
-					<ProductImg />
+					<ProductImg fotos={product?.foto} />
 				</Col>
 				<Col lg={4}>{product && <ProductSummary product={product} />}</Col>
 				<Col lg={4}>

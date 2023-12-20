@@ -45,7 +45,7 @@
 //               }}
 //             >
 //               <div style={{ fontSize: "3rem" }}>+</div>
-//               <div style={{ width: "4rem" }} v>
+//               <div style={{ width: "4rem" }}>
 //                 <Card.Img src={shoppingCart} />
 //               </div>
 //             </button>

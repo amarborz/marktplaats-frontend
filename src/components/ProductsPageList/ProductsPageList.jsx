@@ -10,6 +10,7 @@ const userId = settings.userId
 const ProductList = ({ searchName }) => {
 	const [products, setProducts] = useState([])
 	console.log(`${path}api${searchName}`)
+	console.log(products)
 
 	useEffect(() => {
 		// Fetch user's shopping cart data

@@ -4,11 +4,13 @@ import ProductList from '../components/ProductsPageList/ProductsPageList'
 // Browse multiple products
 
 const ProductsPage = () => {
-	let { url } = useParams();
+	let { url } = useParams()
 	url = url === undefined ? '/product' : `/product/search_name/${url}`
-	return <div style={{backgroundColor: "rgb(245,245,245,1)"}} className='p-5'>
-		<ProductList searchName={url} />
-	</div>
+	return (
+		<div style={{ backgroundColor: 'rgb(245,245,245,1)' }} className="p-5">
+			<ProductList searchName={url} />
+		</div>
+	)
 }
 
 export default ProductsPage

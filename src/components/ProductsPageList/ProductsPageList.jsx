@@ -9,8 +9,6 @@ const userId = settings.userId
 
 const ProductList = ({ searchName }) => {
 	const [products, setProducts] = useState([])
-	console.log('searching for1: ', searchName)
-	console.log('searching for2: ', searchName)
 	console.log(`${path}api${searchName}`)
 
 	useEffect(() => {
@@ -22,7 +20,6 @@ const ProductList = ({ searchName }) => {
 				fetch(`${path}api/item/by_shopping_cart/${shoppingCartData.id}`)
 					.then((res) => res.json())
 					.then((itemData) => {
-						console.log(`${path}api${searchName}`)
 						// Fetch products data
 						fetch(`${path}api${searchName}`)
 							.then((res) => res.json())
@@ -41,7 +38,7 @@ const ProductList = ({ searchName }) => {
 							})
 					})
 			})
-	}, [])
+	}, [searchName])
 
 	return (
 		<Container className="d-flex align-items-center justify-content-center">

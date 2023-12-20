@@ -21,12 +21,7 @@ const NavbarHeader = () => {
 
 	const searchFunction = () => {
 		
-		let url
-		if (searchName === undefined) {
-			url = `/products`
-		} else {
-			url = `/products/${searchName}`
-		}
+		let url = (searchName === undefined ? '/products' : `/products/${searchName}`)
 		console.log("moving to", `/products/${searchName}`)
 		navigate(url)
 	}

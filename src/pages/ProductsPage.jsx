@@ -5,13 +5,7 @@ import ProductList from '../components/ProductsPageList/ProductsPageList'
 
 const ProductsPage = () => {
 	let { url } = useParams();
-	console.log("url before", url)
-	if (url === undefined) {
-		url = '/product'
-	} else {
-		url = `/product/search_name/${url}`
-	}
-	console.log("url after", url)
+	url = url === undefined ? '/product' : `/product/search_name/${url}`
 	return <div style={{backgroundColor: "rgb(245,245,245,1)"}} className='p-5'>
 		<ProductList searchName={url} />
 	</div>

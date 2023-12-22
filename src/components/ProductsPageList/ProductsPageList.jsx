@@ -5,7 +5,6 @@ import ProductsPageCard from '../ProductsPageCard/ProductsPageCard'
 const ProductsPageList = ({ searchName }) => {
 	const userId = localStorage.getItem("id")
 	const [products, setProducts] = useState([])
-	console.log(`${process.env.REACT_APP_PATH}api${searchName}`)
 
 	useEffect(() => {
 		console.log(userId)

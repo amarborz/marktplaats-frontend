@@ -68,9 +68,14 @@ const ProductCard = ({ product }) => {
 	return (
 		<Card style={{ maxWidth: '50rem' }} className="border-0 p-4">
 			<div style={{ display: 'flex' }}>
-				<div style={{ width: '40%' }}>
+				<div style={{ width: '40%', cursor: 'pointer' }}>
 					<LinkContainer to={`/product/${product.id}`}>
-						<Card.Img variant="top" src={img} className="bg-secondary" />
+						<Card.Img
+							style={{ cursor: 'pointer' }}
+							variant="top"
+							src={img}
+							className="bg-secondary"
+						/>
 					</LinkContainer>
 				</div>
 				<Card.Body style={{ display: 'flex', justifyContent: 'space-between' }}>

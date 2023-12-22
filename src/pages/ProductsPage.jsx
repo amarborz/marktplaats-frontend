@@ -9,7 +9,7 @@ const ProductsPage = () => {
 
 	return (
 		<div style={{ backgroundColor: 'rgb(245,245,245,1)' }} className="p-5">
-			<ProductList searchName={url} />
+			<ProductsPageList searchName={url} />
 		</div>
 	)
 }

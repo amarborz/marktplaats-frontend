@@ -8,20 +8,19 @@ import books from '../../utils/images/books.webp'
 import electronics from '../../utils/images/electronics.webp'
 import trash_bin from '../../utils/images/trash_bin.jpg'
 
-import settings from '../../Settings'
 import { LinkContainer } from 'react-router-bootstrap'
 
-const path = settings.path
-
 const ShoppingCartCard = ({ item , resetCheckout}) => {
+	const userId = localStorage.getItem("id")
 	const [quantity, setQuantity] = useState(item.quantity);
 
-
 	const deleteItem = (itemId) => {
-		fetch(`${path}api/item/${itemId}`, {
+		fetch(`${process.env.REACT_APP_PATH}api/item/${itemId}`, {
 			method: "DELETE",
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': localStorage.getItem("token"),
+				'userId': userId,
 			}
 		}).then(() => {
 			console.log("Deleting item: ", itemId)
@@ -31,10 +30,12 @@ const ShoppingCartCard = ({ item , resetCheckout}) => {
 	}
 	const changeQuantity = (newQuantity, itemId) => {
 		setQuantity(newQuantity);
-		fetch(`${path}api/item/${itemId}`, {
+		fetch(`${process.env.REACT_APP_PATH}api/item/${itemId}`, {
 			method: "PUT",
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': localStorage.getItem("token"),
+				'userId': userId,
 			},
 			body: JSON.stringify({
 				"quantity": newQuantity

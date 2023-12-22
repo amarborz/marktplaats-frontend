@@ -4,7 +4,10 @@ import ProductCard from '../ProductCard/ProductCard'
 
 import { CardGroup, Spinner } from 'react-bootstrap'
 
+
+
 const HomeProducts = () => {
+	const userId = localStorage.getItem("id")
 	const [latestProducts, setLatestProducts] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 
@@ -12,10 +15,16 @@ const HomeProducts = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			console.log('path: ', process.env.REACT_APP_PATH)
 			try {
 				console.log('path: ', process.env.REACT_APP_PATH)
-				const response = await fetch(`${process.env.REACT_APP_PATH}api/product`)
+				const response = await fetch(`${process.env.REACT_APP_PATH}api/product`, {
+					method: "GET",
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': localStorage.getItem("token"),
+						'userId': userId,
+						}
+				})
 				const products = await response.json()
 				setLatestProducts(products.slice(-10))
 			} catch (error) {

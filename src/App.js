@@ -12,6 +12,7 @@ import {
 	ShoppingCartPage,
 	NewProductPage,
 	CreditCardPage,
+	LoginPage,
 } from './pages'
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 				<Route path="/shoppingcart" element={<ShoppingCartPage />} />
 				<Route path="/newproduct" element={<NewProductPage />} />
 				<Route path="/payment" element={<CreditCardPage />} />
+				<Route path="/login" element={<LoginPage />} />
 			</Routes>
 		</div>
 	)

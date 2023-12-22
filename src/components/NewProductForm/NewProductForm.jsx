@@ -5,6 +5,7 @@ import UploadImage from '../UploadImage/UploadImage'
 import { Alert, Button, Container, Form, Spinner } from 'react-bootstrap'
 
 const NewProductForm = () => {
+	let user_id = localStorage.getItem("id")
 	const [product, setProduct] = useState({
 		productName: '',
 		price: '',
@@ -83,11 +84,13 @@ const NewProductForm = () => {
 
 		try {
 			const response = await fetch(
-				`${process.env.REACT_APP_PATH}api/product/user/1`,
+				`${process.env.REACT_APP_PATH}api/product/user/${user_id}`,
 				{
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						'Authorization': localStorage.getItem("token"),
+						'userId': user_id,
 					},
 					body: JSON.stringify(readyProduct),
 				}

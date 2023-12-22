@@ -9,25 +9,30 @@ import electronics from '../../utils/images/electronics.webp'
 
 import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 
-import settings from '../../Settings'
-
 import { LinkContainer } from 'react-router-bootstrap'
 
-const path = settings.path
-const userId = settings.userId
-
 const ProductCard = ({ product }) => {
+	const userId = localStorage.getItem("id")
 	const [inCart, setInCart] = useState(false)
 	const addToCart = () => {
-		fetch(`${path}api/shoppingcart/by_user/${userId}`)
+		fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
+            method: "GET",
+            headers: {
+				'Content-Type': 'application/json',
+				'Authorization': localStorage.getItem("token"),
+				'userId': userId,
+				}
+        })
 			.then((res) => {
 				return res.json()
 			})
 			.then((data) => {
-				fetch(`${path}api/item/add_to_cart/${product.id}/${data.id}`, {
+				fetch(`${process.env.REACT_APP_PATH}api/item/add_to_cart/${product.id}/${data.id}`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						'Authorization': localStorage.getItem("token"),
+						'userId': userId,
 					},
 					body: JSON.stringify({
 						quantity: '1',

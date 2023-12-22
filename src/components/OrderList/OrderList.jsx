@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import OrderCard from '../OrderCard/OrderCard';
 
-import settings from '../../Settings'
-
-const path = settings.path
-const userId = settings.userId
-
 const OrderList = () => {
     const [orderedItems, setOrderedItems] = useState([]);
-
+    const userId = localStorage.getItem("id")
     useEffect(() => {
         // Fetch user's order data
-        fetch(`${path}api/order/by_user/${userId}`)
+        fetch(`${process.env.REACT_APP_PATH}api/order/by_user/${userId}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("token"),
+                'userId': userId,
+                }
+        })
             .then((res) => res.json())
             .then((orderData) => {
                 // Initialize an array to accumulate ordered items
@@ -20,7 +22,14 @@ const OrderList = () => {
 
                 // Fetch item data for each order concurrently
                 const fetchItemPromises = orderData.map((order) =>
-                    fetch(`${path}api/item/by_order/${order.id}`)
+                    fetch(`${process.env.REACT_APP_PATH}api/item/by_order/${order.id}`, {
+                        method: "GET",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': localStorage.getItem("token"),
+                            'userId': userId,
+                            }
+                    })
                         .then((res) => res.json())
                 );
 
@@ -64,6 +73,7 @@ const OrderList = () => {
                                             <b>Order ID:</b> {orderedItem.orderId} <br />
                                             <b>Status:</b> {orderedItem.status} <br />
                                             <b>Total payment amount:</b> ${orderedItem.totalPayment} <br />
+                                            <b>Shipped to:</b> {orderedItem.deliveryAddress} <br />
                                             <hr />
                                         </div>
                                     )}

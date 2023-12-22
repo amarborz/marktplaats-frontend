@@ -56,7 +56,7 @@ const CreditCard = () => {
         e.preventDefault()
         console.log(e)
 
-        let user_id = 1
+        let user_id = localStorage.getItem("id")
         let order = {
             "totalPayment": totalPrice,
             "deliveryAddress": "Straat 1",
@@ -69,6 +69,8 @@ const CreditCard = () => {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("token"),
+                'userId': user_id,
             },
             body: JSON.stringify(order)
         })
@@ -79,6 +81,8 @@ const CreditCard = () => {
                         method: "DELETE",
                         headers: {
                             'Content-Type': 'application/json',
+                            'Authorization': localStorage.getItem("token"),
+                            'userId': user_id,
                         }
                     })
                 }

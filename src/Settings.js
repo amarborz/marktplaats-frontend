@@ -1,6 +1,7 @@
 const path = 'https://marktplaatsbackend.azurewebsites.net/'
-const userId = 1
+const userId = localStorage.getItem("id")
 
+console.log("UserId: ", userId)
 const settings = {path, userId}
 export default settings
 

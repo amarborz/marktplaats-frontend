@@ -2,27 +2,44 @@ import React, { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import ProductsPageCard from '../ProductsPageCard/ProductsPageCard'
 
-import settings from '../../Settings'
-
-const path = settings.path
-const userId = settings.userId
-
 const ProductsPageList = ({ searchName }) => {
+	const userId = localStorage.getItem("id")
 	const [products, setProducts] = useState([])
-	console.log(`${path}api${searchName}`)
-	console.log(products)
 
 	useEffect(() => {
+		console.log(userId)
 		// Fetch user's shopping cart data
-		fetch(`${path}api/shoppingcart/by_user/${userId}`)
+		console.log(localStorage.getItem("token"))
+		fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
+			method: "GET",
+			headers: {
+			'Content-Type': 'application/json',
+			'Authorization': localStorage.getItem("token"),
+			'userId': userId,
+			}
+		})
 			.then((res) => res.json())
 			.then((shoppingCartData) => {
 				// Fetch item data
-				fetch(`${path}api/item/by_shopping_cart/${shoppingCartData.id}`)
+				fetch(`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`, {
+					method: "GET",
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': localStorage.getItem("token"),
+						'userId': userId,
+						}
+				})
 					.then((res) => res.json())
 					.then((itemData) => {
 						// Fetch products data
-						fetch(`${path}api${searchName}`)
+						fetch(`${process.env.REACT_APP_PATH}api${searchName}`, {
+							method: "GET",
+							headers: {
+								'Content-Type': 'application/json',
+								'Authorization': localStorage.getItem("token"),
+								'userId': userId,
+								}
+						})
 							.then((res) => res.json())
 							.then((productData) => {
 								const updatedProducts = productData.map((product) => {

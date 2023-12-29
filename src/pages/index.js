@@ -8,6 +8,7 @@ import ShoppingCartPage from './ShoppingCartPage'
 import WishlistPage from './WishlistPage'
 import CreditCardPage from './CreditCardPage'
 import LoginPage from './LoginPage'
+import SignUpPage from './SignUpPage'
 
 export {
 	AccountPage,
@@ -20,4 +21,5 @@ export {
 	WishlistPage,
 	CreditCardPage,
 	LoginPage,
+	SignUpPage,
 }

@@ -13,6 +13,7 @@ import {
 	NewProductPage,
 	CreditCardPage,
 	LoginPage,
+	SignUpPage,
 } from './pages'
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 				<Route path="/newproduct" element={<NewProductPage />} />
 				<Route path="/payment" element={<CreditCardPage />} />
 				<Route path="/login" element={<LoginPage />} />
+				<Route path="/signup" element={<SignUpPage />} />
 			</Routes>
 		</div>
 	)

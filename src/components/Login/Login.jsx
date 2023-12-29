@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom"
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -77,10 +78,21 @@ const Login = () => {
                         onChange={handleChangePassword}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit" className="mt-4">
+                <Button variant="primary" type="submit" className="ms-2 mt-3">
                     Login
                 </Button>
             </Form>
+            {/* <Button variant="primary" type="submit" className="ms-2 mt-3" onClick={navigate(`/signup`)}>
+                Sign up
+            </Button> */}
+            {/* <Button variant="primary"  className="ms-2 mt-3" component={Link} to="/signup">
+                Sign upa
+            </Button> */}
+            <Link to={`/signup`}>
+            <button variant="primary">
+                Sign Up
+            </button>
+        </Link>
         </Container>
     )
 }

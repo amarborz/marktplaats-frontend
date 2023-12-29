@@ -24,7 +24,7 @@ const Checkout = ({ cartItems }) => {
             Delivery costs: {totalPrice >= 20 ? 0 : 3.50}
         </div>
         <div>
-            Final costs: {totalPrice + totalPrice >= 20 ? 0 : 3.50}
+            Final costs: {totalPrice + (totalPrice >= 20 ? 0 : 3.50)}
         </div>
         <Link to={`/payment?totalPrice=${totalPrice}`}>
             <button style={{ backgroundColor: 'blue' }}>

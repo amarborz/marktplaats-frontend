@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 import React, { useState } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+=======
+import React, { useState } from 'react';
+import { Container, Form, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom"
+import { Link } from 'react-router-dom';
+>>>>>>> main
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -52,6 +59,7 @@ const Login = () => {
 			})
 	}
 
+<<<<<<< HEAD
 	return (
 		<Container>
 			<div className="mt5">Login</div>
@@ -84,6 +92,51 @@ const Login = () => {
 			</Form>
 		</Container>
 	)
+=======
+    return (
+        <Container >
+            <div className='mt5'>Login</div>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter email"
+                        name="email"
+                        value={email}
+                        onChange={handleChangeEmail}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter password"
+                        name="password"
+                        value={password}
+                        onChange={handleChangePassword}
+                    />
+                </Form.Group>
+                <Button variant="primary" type="submit" className="ms-2 mt-3">
+                    Login
+                </Button>
+            </Form>
+            {/* <Button variant="primary" type="submit" className="ms-2 mt-3" onClick={navigate(`/signup`)}>
+                Sign up
+            </Button> */}
+            {/* <Button variant="primary"  className="ms-2 mt-3" component={Link} to="/signup">
+                Sign upa
+            </Button> */}
+            <Link to={`/signup`}>
+            <button variant="primary">
+                Sign Up
+            </button>
+        </Link>
+        </Container>
+    )
+>>>>>>> main
 }
 
 export default Login

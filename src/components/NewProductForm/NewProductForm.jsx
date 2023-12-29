@@ -5,7 +5,7 @@ import UploadImage from '../UploadImage/UploadImage'
 import { Alert, Button, Container, Form, Spinner } from 'react-bootstrap'
 
 const NewProductForm = () => {
-	let user_id = localStorage.getItem("id")
+	let user_id = localStorage.getItem('id')
 	const [product, setProduct] = useState({
 		productName: '',
 		price: '',
@@ -47,7 +47,7 @@ const NewProductForm = () => {
 
 		try {
 			const response = await fetch(
-				`https://uploadimagesmarktplaats.azurewebsites.net/api/uploadImages?code=hQqSGzvawxMmIvzlB1VRt13ArCb25Xr6LlpL-NDpuwu4AzFuCqktBA==`,
+				`https://uploadimagesfunctiongroup.azurewebsites.net/api/HttpTrigger1?code=GJecPawoPfvNWiyu231jnJD-JeSYyVaRvurAiwGS-BMwAzFuDgbY2g==`,
 				{
 					method: 'POST',
 					headers: {
@@ -89,8 +89,8 @@ const NewProductForm = () => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						'Authorization': localStorage.getItem("token"),
-						'userId': user_id,
+						Authorization: localStorage.getItem('token'),
+						userId: user_id,
 					},
 					body: JSON.stringify(readyProduct),
 				}
@@ -119,7 +119,8 @@ const NewProductForm = () => {
 	const handleSubmitAll = async (e) => {
 		e.preventDefault()
 		const images = await sendToAzure()
-		handleSubmit(images)
+		console.log(images)
+		// handleSubmit(images)
 	}
 
 	return (
@@ -219,7 +220,7 @@ const NewProductForm = () => {
 						uploadedUrls={uploadedUrls}
 					/>
 				</Form.Group>
-				<Button variant="primary" type="submit" className="mt-4">
+				<Button variant="primary" type="submit" className="mb-5">
 					Add Product
 				</Button>
 			</Form>

@@ -11,36 +11,39 @@ import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 
 import { LinkContainer } from 'react-router-bootstrap'
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, loggedIn }) => {
 	const userId = localStorage.getItem("id")
 	const [inCart, setInCart] = useState(false)
 	const addToCart = () => {
-		fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
-            method: "GET",
-            headers: {
-				'Content-Type': 'application/json',
-				'Authorization': localStorage.getItem("token"),
-				'userId': userId,
+		console.log("loggedIn: ", loggedIn)
+		if (loggedIn) {
+			fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
+				method: "GET",
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': localStorage.getItem("token"),
+					'userId': userId,
 				}
-        })
-			.then((res) => {
-				return res.json()
 			})
-			.then((data) => {
-				fetch(`${process.env.REACT_APP_PATH}api/item/add_to_cart/${product.id}/${data.id}`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Authorization': localStorage.getItem("token"),
-						'userId': userId,
-					},
-					body: JSON.stringify({
-						quantity: '1',
-					}),
+				.then((res) => {
+					return res.json()
 				})
-			})
-		product.color = 'grey'
-		setInCart(true)
+				.then((data) => {
+					fetch(`${process.env.REACT_APP_PATH}api/item/add_to_cart/${product.id}/${data.id}`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': localStorage.getItem("token"),
+							'userId': userId,
+						},
+						body: JSON.stringify({
+							quantity: '1',
+						}),
+					})
+				})
+			product.color = 'grey'
+			setInCart(true)
+		}
 	}
 
 	const saveToLocalStorage = (product) => {
@@ -87,30 +90,32 @@ const ProductCard = ({ product }) => {
 					</div>
 					<div style={{ width: '20%', justifyContent: 'center' }}>
 						<Card.Text style={{ color: 'red' }}>${product.price}</Card.Text>
-						<button
-							id="addToCart"
-							title={
-								product.color === 'grey'
-									? 'Already added to your shopping cart'
-									: 'Add to your shopping cart'
-							}
-							onClick={addToCart}
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								backgroundColor: product.color,
-								border: '2px solid black',
-								borderRadius: '10px',
-							}}
-							disabled={product.color === 'grey'}
-						>
-							<div style={{ fontSize: '1rem' }}>+</div>
-							<div
-								style={{ width: '2rem', color: 'black', fontSize: '1.5rem' }}
+						{userId && (
+							<button
+								id="addToCart"
+								title={
+									product.color === 'grey'
+										? 'Already added to your shopping cart'
+										: 'Add to your shopping cart'
+								}
+								onClick={addToCart}
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									backgroundColor: product.color,
+									border: '2px solid black',
+									borderRadius: '10px',
+								}}
+								disabled={product.color === 'grey'}
 							>
-								<FaCartShopping />
-							</div>
-						</button>
+								<div style={{ fontSize: '1rem' }}>+</div>
+								<div
+									style={{ width: '2rem', color: 'black', fontSize: '1.5rem' }}
+								>
+									<FaCartShopping />
+								</div>
+							</button>
+						)}
 						<button
 							id="addToCart"
 							title={
@@ -127,7 +132,7 @@ const ProductCard = ({ product }) => {
 								margin: 'auto',
 								// 	borderRadius: '10px',
 							}}
-							// disabled={product.color === 'grey'}
+						// disabled={product.color === 'grey'}
 						>
 							{/* <div style={{ fontSize: '1rem' }}>+</div> */}
 							<div

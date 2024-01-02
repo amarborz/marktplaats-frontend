@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Card } from 'react-bootstrap'
 
-import laptop from '../../utils/images/laptop.jpg'
+import noImage from '../../utils/images/noimage.jpg'
 import { useNavigate } from 'react-router-dom'
 
 const ProductCard = ({ data }) => {
@@ -16,7 +16,7 @@ const ProductCard = ({ data }) => {
 		>
 			<Card.Img
 				variant="top"
-				src={laptop}
+				src={data.foto[0] ? data.foto[0] : noImage}
 				className="bg-secondary cursor-pointer"
 				style={{ cursor: 'pointer' }}
 				onClick={handleClick}

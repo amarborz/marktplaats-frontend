@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Card, Carousel, CarouselItem } from 'react-bootstrap'
 
-import laptop from '../../utils/images/laptop.jpg'
+import noImage from '../../utils/images/noimage.jpg'
 
 import styles from './productImg.module.css'
 
@@ -11,16 +11,16 @@ const ProductImg = ({ fotos }) => {
 		<div className={styles.imageContainer}>
 			<Carousel slide={false} variant="dark">
 				{fotos?.length > 0 ? (
-					fotos.map((image) => {
+					fotos.map((image, index) => {
 						return (
-							<CarouselItem key={image}>
+							<CarouselItem key={index}>
 								<img src={image} alt={image} className="d-block w-100" />
 							</CarouselItem>
 						)
 					})
 				) : (
 					<CarouselItem>
-						<img src={laptop} alt={laptop} className="d-block w-100" />
+						<img src={noImage} alt={noImage} className="d-block w-100" />
 					</CarouselItem>
 				)}
 			</Carousel>
@@ -30,7 +30,7 @@ const ProductImg = ({ fotos }) => {
 	// 	<Card style={{ maxWidth: '50rem' }} className="border-0">
 	// 		<Card.Img
 	// 			variant="top"
-	// 			src={fotos?.length > 0 ? fotos[0] : laptop}
+	// 			src={fotos?.length > 0 ? fotos[0] : noImage}
 	// 			className="bg-secondary"
 	// 		/>
 	// 	</Card>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
-import UploadImage from '../UploadImage/UploadImage'
+import UploadImages from '../UploadImages/UploadImages'
 
 import { Alert, Button, Container, Form, Spinner } from 'react-bootstrap'
 
 const NewProductForm = () => {
-	let user_id = localStorage.getItem("id")
+	let userId = localStorage.getItem('id')
+
 	const [product, setProduct] = useState({
 		productName: '',
 		price: '',
@@ -26,49 +27,10 @@ const NewProductForm = () => {
 		message: '',
 	})
 
-	const getBase64 = async (file) => {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader()
-			reader.readAsDataURL(file)
-			reader.onload = () => {
-				resolve(reader.result)
-			}
-			reader.onerror = reject
-		})
-	}
-
-	const sendToAzure = async () => {
-		window.scrollTo(0, 0)
-		setSubmitStatus({ ...submitStatus, submitted: true })
-
-		setTimeout(() => {
-			setSubmitStatus({ ...submitStatus, submitted: false })
-		}, 8000)
-
-		try {
-			const response = await fetch(
-				`https://uploadimagesmarktplaats.azurewebsites.net/api/uploadImages?code=hQqSGzvawxMmIvzlB1VRt13ArCb25Xr6LlpL-NDpuwu4AzFuCqktBA==`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(files),
-				}
-			)
-			const body = await response.json()
-			setUploadedUrls(body.uploadedImages)
-			setProduct({ ...product, foto: body.uploadedImages })
-			console.log(body.uploadedImages)
-			return body.uploadedImages
-		} catch (error) {
-			console.log(error)
-		}
-	}
-
-	const handleFileChange = async (event, index) => {
+	const handleFileChange = (event, index) => {
 		const newFiles = [...files]
-		newFiles[index] = await getBase64(event.target.files[0])
+		console.log(event.target.value)
+		newFiles[index] = event.target.value
 		setFiles(newFiles)
 		console.log(files)
 	}
@@ -77,20 +39,27 @@ const NewProductForm = () => {
 		setProduct({ ...product, [e.target.name]: e.target.value })
 	}
 
-	const handleSubmit = async (images) => {
+	const handleSubmit = async () => {
+		window.scrollTo(0, 0)
+		setSubmitStatus({ ...submitStatus, submitted: true })
+
+		setTimeout(() => {
+			setSubmitStatus({ ...submitStatus, submitted: false })
+		}, 8000)
+
 		console.log('Product Details:', product)
-		const readyProduct = { ...product, foto: images }
+		const readyProduct = { ...product, foto: files }
 		console.log(readyProduct)
 
 		try {
 			const response = await fetch(
-				`${process.env.REACT_APP_PATH}api/product/user/${user_id}`,
+				`${process.env.REACT_APP_PATH}api/product/user/${userId}`,
 				{
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						'Authorization': localStorage.getItem("token"),
-						'userId': user_id,
+						Authorization: localStorage.getItem('token'),
+						userId: userId,
 					},
 					body: JSON.stringify(readyProduct),
 				}
@@ -118,8 +87,8 @@ const NewProductForm = () => {
 
 	const handleSubmitAll = async (e) => {
 		e.preventDefault()
-		const images = await sendToAzure()
-		handleSubmit(images)
+		console.log(files)
+		handleSubmit()
 	}
 
 	return (
@@ -213,13 +182,13 @@ const NewProductForm = () => {
 					</Form.Control>
 				</Form.Group>
 				<Form.Group>
-					<UploadImage
+					<UploadImages
 						files={files}
 						handleFileChange={handleFileChange}
 						uploadedUrls={uploadedUrls}
 					/>
 				</Form.Group>
-				<Button variant="primary" type="submit" className="mt-4">
+				<Button variant="primary" type="submit" className="mb-5">
 					Add Product
 				</Button>
 			</Form>

@@ -9,7 +9,7 @@ const ProductImg = ({ fotos }) => {
 		<Card style={{ maxWidth: '50rem' }} className="border-0">
 			<Card.Img
 				variant="top"
-				src={fotos.length > 0 ? fotos[0] : laptop}
+				src={fotos?.length > 0 ? fotos[0] : laptop}
 				className="bg-secondary"
 			/>
 		</Card>

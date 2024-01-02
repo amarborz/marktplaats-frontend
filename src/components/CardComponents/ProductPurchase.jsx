@@ -5,15 +5,16 @@ import { Card } from 'react-bootstrap'
 
 const ProductPurchase = ({ product }) => {
 	const addToCart = () => {
-		fetch(`$api/item/add_to_cart/${product.id}/1`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				Quantity: 1,
-			}),
-		})
+		console.log('added')
+		// fetch(`$api/item/add_to_cart/${product.id}/1`, {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// 	body: JSON.stringify({
+		// 		Quantity: 1,
+		// 	}),
+		// })
 	}
 
 	return (

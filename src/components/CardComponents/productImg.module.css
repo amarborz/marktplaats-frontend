@@ -1,0 +1,11 @@
+.imageContainer {
+	width: 30vw;
+	display: flex;
+	align-items: center;
+}
+
+@media screen and (max-width: 992px) {
+	.imageContainer {
+		width: 70vw;
+	}
+}

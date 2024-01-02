@@ -1,19 +1,40 @@
 import React from 'react'
 
-import laptop from '../../utils/images/laptop.jpg'
+import { Card, Carousel, CarouselItem } from 'react-bootstrap'
 
-import { Card } from 'react-bootstrap'
+import noImage from '../../utils/images/noimage.jpg'
+
+import styles from './productImg.module.css'
 
 const ProductImg = ({ fotos }) => {
 	return (
-		<Card style={{ maxWidth: '50rem' }} className="border-0">
-			<Card.Img
-				variant="top"
-				src={fotos?.length > 0 ? fotos[0] : laptop}
-				className="bg-secondary"
-			/>
-		</Card>
+		<div className={styles.imageContainer}>
+			<Carousel slide={false} variant="dark">
+				{fotos?.length > 0 ? (
+					fotos.map((image, index) => {
+						return (
+							<CarouselItem key={index}>
+								<img src={image} alt={image} className="d-block w-100" />
+							</CarouselItem>
+						)
+					})
+				) : (
+					<CarouselItem>
+						<img src={noImage} alt={noImage} className="d-block w-100" />
+					</CarouselItem>
+				)}
+			</Carousel>
+		</div>
 	)
+	// return (
+	// 	<Card style={{ maxWidth: '50rem' }} className="border-0">
+	// 		<Card.Img
+	// 			variant="top"
+	// 			src={fotos?.length > 0 ? fotos[0] : noImage}
+	// 			className="bg-secondary"
+	// 		/>
+	// 	</Card>
+	// )
 }
 
 export default ProductImg

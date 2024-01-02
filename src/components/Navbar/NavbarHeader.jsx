@@ -17,12 +17,17 @@ const NavbarHeader = () => {
 	const navigate = useNavigate()
 
 	const [searchName, setSearchName] = useState('')
-	// const [searchType, setSearchType] = useState()
 
 	const searchFunction = () => {
 		let url = searchName === undefined ? '/products' : `/products/${searchName}`
 		console.log('moving to', `/products/${searchName}`)
 		navigate(url)
+	}
+
+	const logout = () => {
+		localStorage.removeItem('name')
+		localStorage.removeItem('token')
+		localStorage.removeItem('id')
 	}
 
 	return (
@@ -77,11 +82,16 @@ const NavbarHeader = () => {
 								<LinkContainer to="/orders">
 									<Nav.Link>Orders</Nav.Link>
 								</LinkContainer>
+								<LinkContainer to="/login" onClick={logout}>
+									<Nav.Link>Logout</Nav.Link>
+								</LinkContainer>
 							</>
 						)}
-						<LinkContainer to="/login">
-							<Nav.Link>Login</Nav.Link>
-						</LinkContainer>
+						{!userId && (
+							<LinkContainer to="/login">
+								<Nav.Link>Login</Nav.Link>
+							</LinkContainer>
+						)}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

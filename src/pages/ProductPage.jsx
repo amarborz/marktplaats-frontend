@@ -9,6 +9,7 @@ import { useParams } from 'react-router'
 // Details about 1 product
 
 const ProductPage = () => {
+	const userId = localStorage.getItem('id')
 	let { productId } = useParams()
 	const [product, setProduct] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
@@ -18,7 +19,15 @@ const ProductPage = () => {
 		const fetchData = async () => {
 			try {
 				const response = await fetch(
-					`https://marktplaatsbackend.azurewebsites.net/api/product/${productId}`
+					`${process.env.REACT_APP_PATH}api/product/${productId}`,
+					{
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: localStorage.getItem('token'),
+							userId: userId,
+						},
+					}
 				)
 				const productResponse = await response.json()
 				setProduct(productResponse)

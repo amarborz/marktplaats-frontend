@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 import React, { useState } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom'
-=======
-import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom"
-import { Link } from 'react-router-dom';
->>>>>>> main
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -59,10 +54,9 @@ const Login = () => {
 			})
 	}
 
-<<<<<<< HEAD
 	return (
 		<Container>
-			<div className="mt5">Login</div>
+			<h3 className="mt5 mb-3">Login</h3>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group>
 					<Form.Label>Email</Form.Label>
@@ -86,57 +80,23 @@ const Login = () => {
 						onChange={handleChangePassword}
 					/>
 				</Form.Group>
-				<Button variant="primary" type="submit" className="mt-4">
+				<Button variant="primary" type="submit" className="ms-2 mt-3">
 					Login
 				</Button>
+				<LinkContainer to={`/signup`}>
+					<Button className="mt-3 ms-3" variant="primary">
+						Sign Up
+					</Button>
+				</LinkContainer>
 			</Form>
-		</Container>
-	)
-=======
-    return (
-        <Container >
-            <div className='mt5'>Login</div>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        required
-                        type="text"
-                        placeholder="Enter email"
-                        name="email"
-                        value={email}
-                        onChange={handleChangeEmail}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        required
-                        type="text"
-                        placeholder="Enter password"
-                        name="password"
-                        value={password}
-                        onChange={handleChangePassword}
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit" className="ms-2 mt-3">
-                    Login
-                </Button>
-            </Form>
-            {/* <Button variant="primary" type="submit" className="ms-2 mt-3" onClick={navigate(`/signup`)}>
+			{/* <Button variant="primary" type="submit" className="ms-2 mt-3" onClick={navigate(`/signup`)}>
                 Sign up
             </Button> */}
-            {/* <Button variant="primary"  className="ms-2 mt-3" component={Link} to="/signup">
+			{/* <Button variant="primary"  className="ms-2 mt-3" component={Link} to="/signup">
                 Sign upa
             </Button> */}
-            <Link to={`/signup`}>
-            <button variant="primary">
-                Sign Up
-            </button>
-        </Link>
-        </Container>
-    )
->>>>>>> main
+		</Container>
+	)
 }
 
 export default Login

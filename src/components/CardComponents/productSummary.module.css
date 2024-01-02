@@ -1,0 +1,79 @@
+.textContainer {
+	padding: 2rem;
+	line-height: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 50vw;
+}
+
+.productName {
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.detailsContainer {
+	line-height: 1rem;
+	margin-top: 2rem;
+	font-weight: 300;
+}
+
+.listContainer {
+	line-height: 1.5rem;
+}
+
+.addButton {
+	transition: all 0.5s;
+	margin-top: 2rem;
+	font-weight: 700;
+	align-self: flex-start;
+	background-color: white;
+	padding: 0.5rem 1rem;
+	border: 1px solid blue;
+}
+
+.addButton:hover {
+	transition: all 0.5s;
+	background-color: blue;
+	color: white;
+}
+
+.price {
+	font-weight: 600;
+}
+
+.sizes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.sizeButton {
+	padding: 0.1rem 0.75rem;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 0.3rem;
+	box-shadow: none;
+	flex-flow: column wrap;
+}
+
+.sizeActiveButton {
+	background-color: black;
+	color: white;
+	padding: 0.1rem 0.75rem;
+	border: 1px solid black;
+	border-radius: 0.3rem;
+	box-shadow: none;
+}
+
+.sizeButton:hover {
+	transition: all 0.5s;
+	background-color: black;
+	color: white;
+}
+
+@media screen and (max-width: 992px) {
+	.textContainer {
+		max-width: 90vw;
+	}
+}

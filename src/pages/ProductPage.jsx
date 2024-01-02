@@ -43,21 +43,36 @@ const ProductPage = () => {
 	}, [productId])
 
 	return (
-		<Container style={{ marginTop: 100 }}>
-			<h1 className="my-5">Productdetails</h1>
-			<Row>
-				<Col lg={4}>
-					<ProductImg fotos={product?.foto} />
-				</Col>
-				<Col lg={4}>{product && <ProductSummary product={product} />}</Col>
-				<Col lg={4}>
-					<ProductPurchase />
-				</Col>
-			</Row>
-			<Row>
-				<Col lg={12}>{product && <ProductDetails product={product} />}</Col>
-			</Row>
-		</Container>
+		<>
+			<div
+				style={{
+					marginTop: 100,
+					display: 'flex',
+					justifyContent: 'center',
+					gap: '3rem',
+					flexWrap: 'wrap',
+				}}
+			>
+				{product && <ProductImg fotos={product?.foto} />}
+				{product && <ProductSummary product={product} />}
+			</div>
+			{product && <ProductDetails product={product} />}
+		</>
+		// <Container style={{ marginTop: 100 }}>
+		// 	<h1 className="my-5">Productdetails</h1>
+		// 	<Row>
+		// 		<Col lg={4}>
+		// 			<ProductImg fotos={product?.foto} />
+		// 		</Col>
+		// 		<Col lg={4}>{product && <ProductSummary product={product} />}</Col>
+		// 		<Col lg={4}>
+		// 			<ProductPurchase />
+		// 		</Col>
+		// 	</Row>
+		// 	<Row>
+		// 		<Col lg={12}>{product && <ProductDetails product={product} />}</Col>
+		// 	</Row>
+		// </Container>
 	)
 }
 export default ProductPage

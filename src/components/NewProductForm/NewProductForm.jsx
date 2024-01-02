@@ -31,6 +31,7 @@ const NewProductForm = () => {
 		const newFiles = [...files]
 		console.log(event.target.value)
 		newFiles[index] = event.target.value
+		setUploadedUrls([...uploadedUrls, event.target.value])
 		setFiles(newFiles)
 		console.log(files)
 	}
@@ -48,7 +49,7 @@ const NewProductForm = () => {
 		}, 8000)
 
 		console.log('Product Details:', product)
-		const readyProduct = { ...product, foto: files }
+		const readyProduct = { ...product, foto: uploadedUrls }
 		console.log(readyProduct)
 
 		try {

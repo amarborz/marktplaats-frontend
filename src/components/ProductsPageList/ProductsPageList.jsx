@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import ProductsPageCard from '../ProductsPageCard/ProductsPageCard'
+import { useLocation } from 'react-router-dom'
 
 const ProductsPageList = ({ searchName }) => {
 	const userId = localStorage.getItem("id")
 	const [products, setProducts] = useState([])
 	const [loggedIn, setLoggedIn] = useState([])
+	const location = useLocation();
+	const searchParams = new URLSearchParams(location.search);
+	const category = searchParams.get('category');
+	console.log("category: ", category)
 
 	useEffect(() => {
-		console.log(userId)
+		// console.log(userId)
 		// Fetch user's shopping cart data
-		console.log(localStorage.getItem("token"))
-		console.log("Trying to access shopping cart data")
+		// console.log(localStorage.getItem("token"))
+		// console.log("Trying to access shopping cart data")
 		fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
 			method: "GET",
 			headers: {
@@ -21,7 +26,7 @@ const ProductsPageList = ({ searchName }) => {
 			}
 		})
 			.then((res) => {
-				console.log("res1: ", res)
+				// console.log("res1: ", res)
 				// if (!res.ok) {
 				// 	throw new Error("response was not ok")
 				// }
@@ -29,7 +34,7 @@ const ProductsPageList = ({ searchName }) => {
 			})
 			.then((shoppingCartData) => {
 				// Fetch item data
-				console.log(shoppingCartData)
+				// console.log(shoppingCartData)
 				fetch(`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`, {
 					method: "GET",
 					headers: {
@@ -39,7 +44,7 @@ const ProductsPageList = ({ searchName }) => {
 					}
 				})
 					.then((res) => {
-						console.log("res2: ", res)
+						// console.log("res2: ", res)
 						return res.json()
 					})
 					.then((itemData) => {
@@ -52,10 +57,10 @@ const ProductsPageList = ({ searchName }) => {
 								'userId': userId,
 							}
 						})
-						.then((res) => {
-							console.log(res)
-							return res.json()
-						})
+							.then((res) => {
+								// console.log(res)
+								return res.json()
+							})
 							.then((productData) => {
 								const updatedProducts = productData.map((product) => {
 									let color = 'rgb(0, 183, 255)'
@@ -69,7 +74,7 @@ const ProductsPageList = ({ searchName }) => {
 
 								setProducts(updatedProducts)
 								setLoggedIn(true)
-								console.log("loggedIn set to true: ", loggedIn)
+								// console.log("loggedIn set to true: ", loggedIn)
 							})
 					})
 			})
@@ -95,9 +100,10 @@ const ProductsPageList = ({ searchName }) => {
 	return (
 		<Container className="d-flex align-items-center justify-content-center">
 			<div>
-				{products.map((product) => (
-					<ProductsPageCard key={product.id} product={product} loggedIn={loggedIn} />
-				))}
+				{products.filter((product) => product.productType === category)
+					.map((filteredProduct) => (
+						<ProductsPageCard key={filteredProduct.id} product={filteredProduct} loggedIn={loggedIn} />
+					))}
 			</div>
 		</Container>
 	)

@@ -7,6 +7,7 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import Select from 'react-select'
 
 import { FaCartShopping, FaHeart, FaUser, FaPlus } from 'react-icons/fa6'
 
@@ -28,6 +29,18 @@ const NavbarHeader = () => {
 		localStorage.removeItem('name')
 		localStorage.removeItem('token')
 		localStorage.removeItem('id')
+	}
+	const options = [
+		{ value: "choose category", label: "Choose category", isDisabled: true },
+		{ value: "electronics", label: "Electronics" },
+		{ value: "book", label: "Books" },
+		{ value: "clothing", label: "Clothes" }
+	]
+
+	const handleSelectChange = (category) => {
+		let url = `/products?category=${category.value}`
+		console.log("This is my url: ", url)
+		navigate(url)
 	}
 
 	return (
@@ -54,6 +67,11 @@ const NavbarHeader = () => {
 						</Button>
 					</Form>
 					<Nav className="mr-auto" style={{ maxHeight: '100px' }} navbarScroll>
+						
+						<Select
+						options={options} 
+						onChange={handleSelectChange}/>
+						
 						<LinkContainer to="/products">
 							<Nav.Link>Browse all products</Nav.Link>
 						</LinkContainer>

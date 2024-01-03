@@ -1,5 +1,6 @@
 .imageContainer {
-	width: 30vw;
+	width: 25vw;
+	/* max-height: 500px; */
 	display: flex;
 	align-items: center;
 }

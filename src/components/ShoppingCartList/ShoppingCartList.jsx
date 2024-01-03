@@ -6,11 +6,11 @@ import Checkout from '../Checkout/Checkout'
 const ShoppingCartList = () => {
   const userId = localStorage.getItem("id")
   const [cartItems, setCartItems] = useState([]);
-  const [resetCosts, setResetCosts] = useState([true])
+  const [resetCount, setResetCount] = useState(0);
 
   const resetCheckout = () => {
     
-    setResetCosts(resetCosts === true ? false : true);
+    setResetCount((prevCount) => prevCount + 1);
     console.log("in resetCheckout....")
   }
 
@@ -42,7 +42,7 @@ const ShoppingCartList = () => {
             setCartItems(itemData);
           });
       });
-  }, [resetCosts]);
+  }, [resetCount, userId]);
 
   return (
     <div style={{ display: 'flex' }}>

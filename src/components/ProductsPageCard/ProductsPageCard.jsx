@@ -12,34 +12,38 @@ import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 import { LinkContainer } from 'react-router-bootstrap'
 
 const ProductCard = ({ product, loggedIn }) => {
-	const userId = localStorage.getItem("id")
+	console.log(product)
+	const userId = localStorage.getItem('id')
 	const [inCart, setInCart] = useState(false)
 	const addToCart = () => {
-		console.log("loggedIn: ", loggedIn)
+		console.log('loggedIn: ', loggedIn)
 		if (loggedIn) {
 			fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
-				method: "GET",
+				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					'Authorization': localStorage.getItem("token"),
-					'userId': userId,
-				}
+					Authorization: localStorage.getItem('token'),
+					userId: userId,
+				},
 			})
 				.then((res) => {
 					return res.json()
 				})
 				.then((data) => {
-					fetch(`${process.env.REACT_APP_PATH}api/item/add_to_cart/${product.id}/${data.id}`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'Authorization': localStorage.getItem("token"),
-							'userId': userId,
-						},
-						body: JSON.stringify({
-							quantity: '1',
-						}),
-					})
+					fetch(
+						`${process.env.REACT_APP_PATH}api/item/add_to_cart/${product.id}/${data.id}`,
+						{
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								Authorization: localStorage.getItem('token'),
+								userId: userId,
+							},
+							body: JSON.stringify({
+								quantity: '1',
+							}),
+						}
+					)
 				})
 			product.color = 'grey'
 			setInCart(true)
@@ -74,7 +78,7 @@ const ProductCard = ({ product, loggedIn }) => {
 				<div style={{ width: '40%', cursor: 'pointer' }}>
 					<LinkContainer to={`/product/${product.id}`}>
 						<Card.Img
-							style={{ cursor: 'pointer' }}
+							style={{ cursor: 'pointer', maxWidth: '200px' }}
 							variant="top"
 							src={img}
 							className="bg-secondary"
@@ -86,7 +90,11 @@ const ProductCard = ({ product, loggedIn }) => {
 						<Card.Title style={{ fontSize: '1.5rem' }}>
 							{product.productName}
 						</Card.Title>
-						<Card.Subtitle>{product.productDescription}</Card.Subtitle>
+						<Card.Subtitle>
+							{product.productDescription.length > 100
+								? product.productDescription.slice(0, 100) + '...'
+								: product.productDescription}
+						</Card.Subtitle>
 					</div>
 					<div style={{ width: '20%', justifyContent: 'center' }}>
 						<Card.Text style={{ color: 'red' }}>${product.price}</Card.Text>
@@ -132,7 +140,7 @@ const ProductCard = ({ product, loggedIn }) => {
 								margin: 'auto',
 								// 	borderRadius: '10px',
 							}}
-						// disabled={product.color === 'grey'}
+							// disabled={product.color === 'grey'}
 						>
 							{/* <div style={{ fontSize: '1rem' }}>+</div> */}
 							<div

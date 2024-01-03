@@ -98,18 +98,31 @@ const ProductsPageList = ({ searchName }) => {
 						setLoggedIn(false)
 					})
 			})
+<<<<<<< HEAD
 		console.log('loggedIn: ', loggedIn)
 	}, [searchName])
+=======
+		console.log("loggedIn: ", loggedIn)
+	}, [searchName, loggedIn, userId])
+>>>>>>> main
 
 	return (
 		<Container className="d-flex align-items-center justify-content-center">
 			<div>
 				{products
+<<<<<<< HEAD
 					.filter((product) =>
 						category
 							? product.productType === category
 							: product.productType !== category
 					)
+=======
+				.filter((product) => 
+					category
+					? product.productType === category
+					: product.productType !== category
+				)
+>>>>>>> main
 					.map((filteredProduct) => (
 						<ProductsPageCard
 							key={filteredProduct.id}

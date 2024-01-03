@@ -4,14 +4,15 @@ import ShoppingCartCard from '../ShoppingCartCard/ShoppingCartCard'
 import Checkout from '../Checkout/Checkout'
 
 const ShoppingCartList = () => {
-	const userId = localStorage.getItem('id')
-	const [cartItems, setCartItems] = useState([])
-	const [resetCosts, setResetCosts] = useState([true])
+  const userId = localStorage.getItem("id")
+  const [cartItems, setCartItems] = useState([]);
+  const [resetCount, setResetCount] = useState(0);
 
-	const resetCheckout = () => {
-		setResetCosts(resetCosts === true ? false : true)
-		console.log('in resetCheckout....')
-	}
+  const resetCheckout = () => {
+    
+    setResetCount((prevCount) => prevCount + 1);
+    console.log("in resetCheckout....")
+  }
 
 	useEffect(() => {
 		// Fetch user's shopping cart data
@@ -26,25 +27,21 @@ const ShoppingCartList = () => {
 		})
 			.then((res) => res.json())
 			.then((shoppingCartData) => {
-				// Fetch item data
-				fetch(
-					`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`,
-					{
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: localStorage.getItem('token'),
-							userId: userId,
-						},
-					}
-				)
-					.then((res) => res.json())
-					.then((itemData) => {
-						setCartItems(itemData)
-					})
-			})
-	}, [resetCosts])
-
+        // Fetch item data
+        fetch(`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`, {
+					method: "GET",
+					headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token"),
+            'userId': userId,
+            }
+				})
+          .then((res) => res.json())
+          .then((itemData) => {
+            setCartItems(itemData);
+          });
+      });
+  }, [resetCount, userId]);
 	return (
 		<div style={{ display: 'flex' }}>
 			<div style={{ width: '10%' }}></div>

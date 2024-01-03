@@ -13,6 +13,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 const ShoppingCartCard = ({ item , resetCheckout}) => {
 	const userId = localStorage.getItem("id")
 	const [quantity, setQuantity] = useState(item.quantity);
+	console.log(quantity)
 
 	const deleteItem = (itemId) => {
 		fetch(`${process.env.REACT_APP_PATH}api/item/${itemId}`, {
@@ -90,7 +91,7 @@ const ShoppingCartCard = ({ item , resetCheckout}) => {
 										borderRadius: '20px',
 										padding: '5px',
 									}}
-									value={quantity}
+									value={item.quantity}
 								>
 									{[...Array(100).keys()].map((num) => (
 										<option key={num + 1} value={num + 1}>

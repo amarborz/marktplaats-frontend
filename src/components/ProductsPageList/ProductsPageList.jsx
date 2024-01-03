@@ -4,13 +4,14 @@ import ProductsPageCard from '../ProductsPageCard/ProductsPageCard'
 import { useLocation } from 'react-router-dom'
 
 const ProductsPageList = ({ searchName }) => {
-	const userId = localStorage.getItem("id")
+	const userId = localStorage.getItem('id')
 	const [products, setProducts] = useState([])
 	const [loggedIn, setLoggedIn] = useState([])
-	const location = useLocation();
-	const searchParams = new URLSearchParams(location.search);
-	const category = searchParams.get('category');
-	console.log("category: ", category)
+	const location = useLocation()
+	const searchParams = new URLSearchParams(location.search)
+	const category = searchParams.get('category')
+	console.log('category: ', category)
+	console.log(products)
 
 	useEffect(() => {
 		// console.log(userId)
@@ -18,12 +19,12 @@ const ProductsPageList = ({ searchName }) => {
 		// console.log(localStorage.getItem("token"))
 		// console.log("Trying to access shopping cart data")
 		fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
-			method: "GET",
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': localStorage.getItem("token"),
-				'userId': userId,
-			}
+				Authorization: localStorage.getItem('token'),
+				userId: userId,
+			},
 		})
 			.then((res) => {
 				// console.log("res1: ", res)
@@ -35,14 +36,17 @@ const ProductsPageList = ({ searchName }) => {
 			.then((shoppingCartData) => {
 				// Fetch item data
 				// console.log(shoppingCartData)
-				fetch(`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`, {
-					method: "GET",
-					headers: {
-						'Content-Type': 'application/json',
-						'Authorization': localStorage.getItem("token"),
-						'userId': userId,
+				fetch(
+					`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`,
+					{
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: localStorage.getItem('token'),
+							userId: userId,
+						},
 					}
-				})
+				)
 					.then((res) => {
 						// console.log("res2: ", res)
 						return res.json()
@@ -50,12 +54,12 @@ const ProductsPageList = ({ searchName }) => {
 					.then((itemData) => {
 						// Fetch products data
 						fetch(`${process.env.REACT_APP_PATH}api${searchName}`, {
-							method: "GET",
+							method: 'GET',
 							headers: {
 								'Content-Type': 'application/json',
-								'Authorization': localStorage.getItem("token"),
-								'userId': userId,
-							}
+								Authorization: localStorage.getItem('token'),
+								userId: userId,
+							},
 						})
 							.then((res) => {
 								// console.log(res)
@@ -79,14 +83,14 @@ const ProductsPageList = ({ searchName }) => {
 					})
 			})
 			.catch((error) => {
-				console.log("catching the error")
+				console.log('catching the error')
 				fetch(`${process.env.REACT_APP_PATH}api${searchName}`, {
-					method: "GET",
+					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
 						// 'Authorization': localStorage.getItem("token"),
 						// 'userId': userId,
-					}
+					},
 				})
 					.then((res) => res.json())
 					.then((productData) => {
@@ -94,15 +98,24 @@ const ProductsPageList = ({ searchName }) => {
 						setLoggedIn(false)
 					})
 			})
-		console.log("loggedIn: ", loggedIn)
+		console.log('loggedIn: ', loggedIn)
 	}, [searchName])
 
 	return (
 		<Container className="d-flex align-items-center justify-content-center">
 			<div>
-				{products.filter((product) => product.productType === category)
+				{products
+					.filter((product) =>
+						category
+							? product.productType === category
+							: product.productType !== category
+					)
 					.map((filteredProduct) => (
-						<ProductsPageCard key={filteredProduct.id} product={filteredProduct} loggedIn={loggedIn} />
+						<ProductsPageCard
+							key={filteredProduct.id}
+							product={filteredProduct}
+							loggedIn={loggedIn}
+						/>
 					))}
 			</div>
 		</Container>

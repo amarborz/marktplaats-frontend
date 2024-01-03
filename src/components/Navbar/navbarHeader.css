@@ -52,6 +52,10 @@
 	color: white;
 } */
 
+.navbar-collapse {
+	justify-content: center;
+}
+
 .icons {
 	font-size: larger;
 	color: blue;

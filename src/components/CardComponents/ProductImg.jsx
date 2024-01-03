@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, Carousel, CarouselItem } from 'react-bootstrap'
+import { Card, Carousel, CarouselItem, Image } from 'react-bootstrap'
 
 import noImage from '../../utils/images/noimage.jpg'
 
@@ -14,13 +14,23 @@ const ProductImg = ({ fotos }) => {
 					fotos.map((image, index) => {
 						return (
 							<CarouselItem key={index}>
-								<img src={image} alt={image} className="d-block w-100" />
+								<Image
+									src={image}
+									alt={image}
+									// className="d-block w-100"
+									fluid
+								/>
 							</CarouselItem>
 						)
 					})
 				) : (
 					<CarouselItem>
-						<img src={noImage} alt={noImage} className="d-block w-100" />
+						<Image
+							src={noImage}
+							alt={noImage}
+							className="d-block w-100"
+							fluid
+						/>
 					</CarouselItem>
 				)}
 			</Carousel>

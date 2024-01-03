@@ -95,12 +95,17 @@ const ProductsPageList = ({ searchName }) => {
 					})
 			})
 		console.log("loggedIn: ", loggedIn)
-	}, [searchName])
+	}, [searchName, loggedIn, userId])
 
 	return (
 		<Container className="d-flex align-items-center justify-content-center">
 			<div>
-				{products.filter((product) => product.productType === category)
+				{products
+				.filter((product) => 
+					category
+					? product.productType === category
+					: product.productType !== category
+				)
 					.map((filteredProduct) => (
 						<ProductsPageCard key={filteredProduct.id} product={filteredProduct} loggedIn={loggedIn} />
 					))}

@@ -15,7 +15,7 @@ const NewProductForm = () => {
 		weight: '',
 		productType: '',
 		foto: [],
-		productDetails: [{ propertyName: 'Brand', propertyValue: 'Samsung' }],
+		// productDetails: [{ propertyName: 'Brand', propertyValue: 'Samsung' }],
 	})
 
 	const [files, setFiles] = useState(new Array(10).fill(null))
@@ -91,6 +91,46 @@ const NewProductForm = () => {
 		console.log(files)
 		handleSubmit()
 	}
+
+	// const renderAdditionalInput = () => {
+	// 	switch (product.productType) {
+	// 		case 'electronics':
+	// 			return (
+	// 				<Form.Group>
+	// 					<Form.Label>Brand</Form.Label>
+	// 					<Form.Control
+	// 						type="text"
+	// 						name="Brand"
+	// 						value={
+	// 							product.productDetails.find(
+	// 								(detail) => detail.propertyName === 'Brand'
+	// 							)?.propertyValue || ''
+	// 						}
+	// 						// onChange={handleDetailChange}
+	// 					/>
+	// 				</Form.Group>
+	// 			)
+	// 		case 'books':
+	// 			return (
+	// 				<Form.Group>
+	// 					<Form.Label>Condition</Form.Label>
+	// 					<Form.Control
+	// 						type="text"
+	// 						name="Condition"
+	// 						value={
+	// 							product.productDetails.find(
+	// 								(detail) => detail.propertyName === 'Condition'
+	// 							)?.propertyValue || ''
+	// 						}
+	// 						// onChange={handleDetailChange}
+	// 					/>
+	// 				</Form.Group>
+	// 			)
+	// 		// Add cases for other product types as needed
+	// 		default:
+	// 			return null
+	// 	}
+	// }
 
 	return (
 		<Container className="mt-5">
@@ -180,8 +220,12 @@ const NewProductForm = () => {
 						<option value="electronics">Electronics</option>
 						<option value="clothes">Clothes</option>
 						<option value="books">Books</option>
+						<option value="furniture">Furniture</option>
+						<option value="sport">Sport</option>
+						<option value="games">Games</option>
 					</Form.Control>
 				</Form.Group>
+				{/* {renderAdditionalInput()} */}
 				<Form.Group>
 					<UploadImages
 						files={files}

@@ -9,7 +9,7 @@ const ProductSummary = ({ product }) => {
 		<div className={styles.textContainer}>
 			<h4>{product.productName}</h4>
 
-			<p className={styles.price}>${product.price}.00</p>
+			<p className={styles.price}>${product.price}</p>
 			{/* <div className={styles.detailsContainer}> */}
 			{/* <p>{product.productDescription}</p> */}
 			<h6>Category: {product.productType}</h6>

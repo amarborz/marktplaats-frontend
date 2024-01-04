@@ -62,7 +62,7 @@ const ProductCard = ({ product, loggedIn }) => {
 
 	return (
 		<Card
-			style={{ maxWidth: '50rem' }}
+			style={{ width: '50rem' }}
 			className="border-start-0 border-end-0 border-bottom-0 rounded-0 p-4"
 		>
 			<div style={{ display: 'flex' }}>

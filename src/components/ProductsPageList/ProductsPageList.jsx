@@ -79,6 +79,7 @@ const ProductsPageList = ({ searchName }) => {
 
 								setProducts(updatedProducts)
 								setLoggedIn(true)
+								setIsLoading(false)
 								// console.log("loggedIn set to true: ", loggedIn)
 							})
 					})
@@ -100,7 +101,6 @@ const ProductsPageList = ({ searchName }) => {
 					})
 			})
 		console.log('loggedIn: ', loggedIn)
-		setIsLoading(false)
 	}, [searchName, loggedIn, userId])
 
 	return (

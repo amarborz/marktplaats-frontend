@@ -4,9 +4,12 @@ import CategoryCard from '../CategoryCard/CategoryCard'
 
 import { CardGroup } from 'react-bootstrap'
 
-import electronics from '../../utils/images/electronics.webp'
+import electronics from '../../utils/images/electronics.png'
 import books from '../../utils/images/books.webp'
-import clothes from '../../utils/images/clothes.webp'
+import clothes from '../../utils/images/clothes.jpg'
+import sports from '../../utils/images/sport.jpg'
+import furniture from '../../utils/images/furniture.jpg'
+import games from '../../utils/images/games.png'
 
 const categories = [
 	{ name: 'Electronics', image: electronics },

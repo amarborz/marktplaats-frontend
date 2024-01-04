@@ -2,10 +2,6 @@ import React, { useState } from 'react'
 
 import { Card } from 'react-bootstrap'
 
-import laptop from '../../utils/images/laptop.jpg'
-import clothes from '../../utils/images/clothes.webp'
-import books from '../../utils/images/books.webp'
-import electronics from '../../utils/images/electronics.webp'
 import noImage from '../../utils/images/noimage.jpg'
 
 import { LinkContainer } from 'react-router-bootstrap'
@@ -46,14 +42,6 @@ const ShoppingCartCard = ({ item, resetCheckout }) => {
 		resetCheckout()
 	}
 
-	let img = laptop
-	if (item.productType === 'Electronica') {
-		img = electronics
-	} else if (item.productType === 'Kleding') {
-		img = clothes
-	} else if (['boeken', 'books', 'Books'].includes(item.productType)) {
-		img = books
-	}
 	return (
 		<Card
 			style={{ maxWidth: '60rem' }}

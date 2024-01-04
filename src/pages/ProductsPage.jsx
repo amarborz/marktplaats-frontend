@@ -8,7 +8,7 @@ const ProductsPage = () => {
 	url = url === undefined ? '/product' : `/product/search_name/${url}`
 
 	return (
-		<div style={{ backgroundColor: 'rgb(245,245,245,1)' }} className="p-5">
+		<div style={{ marginTop: 100 }} className="">
 			<ProductsPageList searchName={url} />
 		</div>
 	)

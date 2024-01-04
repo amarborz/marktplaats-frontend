@@ -25,10 +25,13 @@ const Checkout = ({ cartItems }) => {
 	return (
 		<div className="sticky-top checkoutDiv" style={{ top: '100px' }}>
 			<h6>Number of items: {totalAmount}</h6>
-			<h6>Price of items: {totalPrice}$</h6>
+			<h6>Price of items: {totalPrice.toFixed(2)}$</h6>
 			<h6>Delivery costs: {totalPrice >= 20 ? 0 : 3.5}$</h6>
-			<h6>Final costs: {totalPrice + (totalPrice >= 20 ? 0 : 3.5)}$</h6>
-			<Link to={`/payment?totalPrice=${totalPrice}`}>
+			<h6>
+				Final costs:{' '}
+				{parseFloat(totalPrice.toFixed(2)) + (totalPrice >= 20 ? 0 : 3.5)}$
+			</h6>
+			<Link to={`/payment?totalPrice=${totalPrice.toFixed(2)}`}>
 				<button className="checkoutButton">Checkout</button>
 			</Link>
 		</div>

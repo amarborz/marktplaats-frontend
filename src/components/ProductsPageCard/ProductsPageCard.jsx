@@ -6,6 +6,7 @@ import laptop from '../../utils/images/laptop.jpg'
 import clothes from '../../utils/images/clothes.webp'
 import books from '../../utils/images/books.webp'
 import electronics from '../../utils/images/electronics.webp'
+import noImage from '../../utils/images/noimage.jpg'
 
 import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 
@@ -73,24 +74,29 @@ const ProductCard = ({ product, loggedIn }) => {
 	}
 
 	return (
-		<Card style={{ maxWidth: '50rem' }} className="border-0 p-4">
+		<Card
+			style={{ maxWidth: '50rem' }}
+			className="border-start-0 border-end-0 border-bottom-0 rounded-0 p-4"
+		>
 			<div style={{ display: 'flex' }}>
-				<div style={{ width: '40%', cursor: 'pointer' }}>
-					<LinkContainer to={`/product/${product.id}`}>
+				<div style={{ width: '30%', cursor: 'pointer' }}>
+					<LinkContainer
+						to={`/product/${product.id}`}
+						style={{ cursor: 'pointer', width: 250 }}
+					>
 						<Card.Img
-							style={{ cursor: 'pointer', maxWidth: '200px' }}
 							variant="top"
-							src={img}
+							src={product.foto?.length > 0 ? product.foto[0] : noImage}
 							className="bg-secondary"
 						/>
 					</LinkContainer>
 				</div>
 				<Card.Body style={{ display: 'flex', justifyContent: 'space-between' }}>
-					<div style={{ width: '40%' }}>
-						<Card.Title style={{ fontSize: '1.5rem' }}>
+					<div style={{ width: '50%' }}>
+						<Card.Title style={{ fontSize: '1.5rem' }} className="ms-4 mb-4">
 							{product.productName}
 						</Card.Title>
-						<Card.Subtitle>
+						<Card.Subtitle className="ms-4">
 							{product.productDescription.length > 100
 								? product.productDescription.slice(0, 100) + '...'
 								: product.productDescription}

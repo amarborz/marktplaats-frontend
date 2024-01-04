@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Spinner } from 'react-bootstrap'
 import ProductsPageCard from '../ProductsPageCard/ProductsPageCard'
 import { useLocation } from 'react-router-dom'
 
@@ -7,6 +7,7 @@ const ProductsPageList = ({ searchName }) => {
 	const userId = localStorage.getItem('id')
 	const [products, setProducts] = useState([])
 	const [loggedIn, setLoggedIn] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
 	const location = useLocation()
 	const searchParams = new URLSearchParams(location.search)
 	const category = searchParams.get('category')
@@ -99,10 +100,13 @@ const ProductsPageList = ({ searchName }) => {
 					})
 			})
 		console.log('loggedIn: ', loggedIn)
+		setIsLoading(false)
 	}, [searchName, loggedIn, userId])
 
 	return (
 		<Container className="d-flex align-items-center justify-content-center">
+			{isLoading && <Spinner animation="border" role="status"></Spinner>}
+			{!isLoading && products.length === 0 && <h3>There are no products.</h3>}
 			<div>
 				{products
 					.filter((product) =>

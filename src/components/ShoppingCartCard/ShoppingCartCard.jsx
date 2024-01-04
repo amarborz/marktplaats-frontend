@@ -67,7 +67,7 @@ const ShoppingCartCard = ({ item, resetCheckout }) => {
 					>
 						<Card.Img
 							variant="top"
-							src={item.fotos?.length > 0 ? item.fotos[0] : noImage}
+							src={item.foto?.length > 0 ? item.foto[0] : noImage}
 							className="bg-secondary"
 						/>
 					</LinkContainer>

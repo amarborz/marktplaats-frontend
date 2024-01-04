@@ -2,10 +2,6 @@ import React, { useState } from 'react'
 
 import { Card } from 'react-bootstrap'
 
-import laptop from '../../utils/images/laptop.jpg'
-import clothes from '../../utils/images/clothes.webp'
-import books from '../../utils/images/books.webp'
-import electronics from '../../utils/images/electronics.webp'
 import noImage from '../../utils/images/noimage.jpg'
 
 import { FaCartShopping, FaHeart } from 'react-icons/fa6'
@@ -64,18 +60,9 @@ const ProductCard = ({ product, loggedIn }) => {
 		localStorage.setItem(storageKey, JSON.stringify(existingData))
 	}
 
-	let img = laptop
-	if (product.productType === 'Electronica') {
-		img = electronics
-	} else if (product.productType === 'Kleding') {
-		img = clothes
-	} else if (['boeken', 'books', 'Books'].includes(product.productType)) {
-		img = books
-	}
-
 	return (
 		<Card
-			style={{ maxWidth: '50rem' }}
+			style={{ width: '50rem' }}
 			className="border-start-0 border-end-0 border-bottom-0 rounded-0 p-4"
 		>
 			<div style={{ display: 'flex' }}>
@@ -103,7 +90,9 @@ const ProductCard = ({ product, loggedIn }) => {
 						</Card.Subtitle>
 					</div>
 					<div style={{ width: '20%', justifyContent: 'center' }}>
-						<Card.Text style={{ color: 'red' }}>${product.price}</Card.Text>
+						<Card.Text style={{ color: 'red', fontWeight: 700, fontSize: 20 }}>
+							${product.price}
+						</Card.Text>
 						{userId && (
 							<button
 								id="addToCart"

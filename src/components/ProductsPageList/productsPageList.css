@@ -1,0 +1,17 @@
+.loadMoreButton {
+	transition: all 0.4s;
+	margin: auto;
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+	padding: 1rem 2rem;
+	background-color: white;
+	border: 1px solid black;
+	display: block;
+	border-radius: 0.5rem;
+}
+
+.loadMoreButton:hover {
+	transition: all 0.4s;
+	background-color: blue;
+	color: white;
+}

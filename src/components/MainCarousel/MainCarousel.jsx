@@ -9,6 +9,7 @@ import clothes from '../../utils/images/clothes.jpg'
 import sports from '../../utils/images/sport.jpg'
 import furniture from '../../utils/images/furniture.jpg'
 import games from '../../utils/images/games.png'
+import { useNavigate } from 'react-router-dom'
 
 const carouselData = [
 	{ name: 'Games', description: 'Play, play, play!', image: games },
@@ -24,6 +25,14 @@ const carouselData = [
 ]
 
 const MainCarousel = () => {
+	const navigate = useNavigate()
+
+	const handleCategoryClick = (category) => {
+		let url = `/products?category=${category}`
+		console.log('This is my url: ', url)
+		navigate(url)
+	}
+
 	return (
 		<Container className="w-50 d-flex justify-content-center mt-5">
 			<Carousel data-bs-theme="white" className="mt-5">
@@ -34,7 +43,15 @@ const MainCarousel = () => {
 								className="d-block w-100 rounded"
 								src={data.image}
 								alt={data.name}
-								style={{ height: 400, objectFit: 'cover' }}
+								style={{
+									height: 400,
+									objectFit: 'cover',
+									filter: 'brightness(50%)',
+									cursor: 'pointer',
+								}}
+								onClick={() => {
+									handleCategoryClick(data.name.toLowerCase())
+								}}
 							/>
 							<Carousel.Caption>
 								<h3>{data.name}</h3>

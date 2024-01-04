@@ -79,22 +79,22 @@ const NavbarHeader = () => {
 						{userId && (
 							<>
 								<LinkContainer to="/newproduct">
-									<Nav.Link>
+									<Nav.Link title="Add a new product">
 										<FaPlus className="icons" />
 									</Nav.Link>
 								</LinkContainer>
 								<LinkContainer to="/account">
-									<Nav.Link>
+									<Nav.Link title="Your Account">
 										<FaUser className="icons" />
 									</Nav.Link>
 								</LinkContainer>
 								<LinkContainer to="/wishlist">
-									<Nav.Link>
+									<Nav.Link title="Your Wishlist">
 										<FaHeart className="icons" />
 									</Nav.Link>
 								</LinkContainer>
 								<LinkContainer to="/shoppingcart">
-									<Nav.Link>
+									<Nav.Link title="Your Shopping Cart">
 										<FaCartShopping className="icons" />
 									</Nav.Link>
 								</LinkContainer>

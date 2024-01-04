@@ -1,0 +1,23 @@
+.checkoutDiv {
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+}
+
+.checkoutButton {
+	transition: all 0.5s;
+	margin-top: 2rem;
+	font-weight: 700;
+	align-self: flex-start;
+	background-color: white;
+	padding: 0.5rem 1rem;
+	border: 1px solid blue;
+}
+
+.checkoutButton:hover {
+	transition: all 0.5s;
+	background-color: blue;
+	color: white;
+}

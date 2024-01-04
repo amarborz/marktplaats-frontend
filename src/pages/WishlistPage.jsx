@@ -4,7 +4,7 @@ import WishlistProducts from '../components/WishlistProducts/WishlistProducts'
 
 const WishlistPage = () => {
 	return (
-		<div>
+		<div style={{ marginTop: '100px' }}>
 			<WishlistProducts />
 		</div>
 	)

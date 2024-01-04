@@ -1,10 +1,12 @@
 import React from 'react'
-import ShoppingCart from '../components/ShoppingCartList/ShoppingCartList'
+import ShoppingCartList from '../components/ShoppingCartList/ShoppingCartList'
 
 const ShoppingCartPage = () => {
-	return <div style={{ backgroundColor: "rgb(245,245,245,1)" }} className='p-5'>
-		<ShoppingCart />
-	</div>
+	return (
+		<div style={{ marginTop: 100 }}>
+			<ShoppingCartList />
+		</div>
+	)
 }
 
 export default ShoppingCartPage

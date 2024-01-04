@@ -4,15 +4,14 @@ import ShoppingCartCard from '../ShoppingCartCard/ShoppingCartCard'
 import Checkout from '../Checkout/Checkout'
 
 const ShoppingCartList = () => {
-  const userId = localStorage.getItem("id")
-  const [cartItems, setCartItems] = useState([]);
-  const [resetCount, setResetCount] = useState(0);
+	const userId = localStorage.getItem('id')
+	const [cartItems, setCartItems] = useState([])
+	const [resetCount, setResetCount] = useState(0)
 
-  const resetCheckout = () => {
-    
-    setResetCount((prevCount) => prevCount + 1);
-    console.log("in resetCheckout....")
-  }
+	const resetCheckout = () => {
+		setResetCount((prevCount) => prevCount + 1)
+		console.log('in resetCheckout....')
+	}
 
 	useEffect(() => {
 		// Fetch user's shopping cart data
@@ -27,30 +26,33 @@ const ShoppingCartList = () => {
 		})
 			.then((res) => res.json())
 			.then((shoppingCartData) => {
-        // Fetch item data
-        fetch(`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`, {
-					method: "GET",
-					headers: {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("token"),
-            'userId': userId,
-            }
-				})
-          .then((res) => res.json())
-          .then((itemData) => {
-            setCartItems(itemData);
-          });
-      });
-  }, [resetCount, userId]);
+				// Fetch item data
+				fetch(
+					`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`,
+					{
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: localStorage.getItem('token'),
+							userId: userId,
+						},
+					}
+				)
+					.then((res) => res.json())
+					.then((itemData) => {
+						setCartItems(itemData)
+					})
+			})
+	}, [resetCount, userId])
 	return (
 		<div style={{ display: 'flex' }}>
 			<div style={{ width: '10%' }}></div>
-			<div style={{ width: '70%' }}>
+			<div style={{ width: '60%' }}>
 				<Container className="d-flex align-items-center justify-content-center">
 					<div>
-						{cartItems.map((item, index) => (
+						{cartItems.map((item) => (
 							<ShoppingCartCard
-								key={item.id + index}
+								key={item.id}
 								item={item}
 								resetCheckout={resetCheckout}
 							/>
@@ -58,7 +60,7 @@ const ShoppingCartList = () => {
 					</div>
 				</Container>
 			</div>
-			<div style={{ width: '20%' }}>
+			<div style={{ width: '30%' }}>
 				<Checkout cartItems={cartItems} />
 			</div>
 		</div>

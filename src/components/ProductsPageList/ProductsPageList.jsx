@@ -12,6 +12,7 @@ const ProductsPageList = ({ searchName }) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [limitedProducts, setLimitedProducts] = useState([])
 	const [number, setNumber] = useState(10)
+	const [showLoadButton, setShowLoadButton] = useState(true)
 
 	const userId = localStorage.getItem('id')
 	const location = useLocation()
@@ -114,19 +115,28 @@ const ProductsPageList = ({ searchName }) => {
 		setNumber((prevNumber) => prevNumber + 10)
 	}
 
-	const loadMoreButton = number < products.length && (
+	const loadMoreButton = showLoadButton && (
 		<button className={'loadMoreButton'} onClick={incrementHandler}>
 			LOAD MORE
 		</button>
 	)
 
 	useEffect(() => {
-		if (products.length > number) {
-			setLimitedProducts(products.slice(0, number))
+		const filteredProducts = products.filter((product) =>
+			category
+				? product.productType === category
+				: product.productType !== category
+		)
+		if (filteredProducts.length > number) {
+			setLimitedProducts(filteredProducts.slice(0, number))
+
+			setShowLoadButton(true)
+
 			return
 		}
 		setLimitedProducts(products)
-	}, [products, number])
+		setShowLoadButton(false)
+	}, [products, number, category])
 
 	return (
 		<Container className="d-flex align-items-center justify-content-center">
@@ -146,7 +156,7 @@ const ProductsPageList = ({ searchName }) => {
 							loggedIn={loggedIn}
 						/>
 					))}
-				{loadMoreButton}
+				{!isLoading && loadMoreButton}
 			</div>
 		</Container>
 	)

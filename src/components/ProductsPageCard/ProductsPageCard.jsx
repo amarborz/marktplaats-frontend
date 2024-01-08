@@ -12,6 +12,8 @@ const ProductCard = ({ product, loggedIn }) => {
 	console.log(product)
 	const userId = localStorage.getItem('id')
 	const [inCart, setInCart] = useState(false)
+	console.log(inCart)
+
 	const addToCart = () => {
 		console.log('loggedIn: ', loggedIn)
 		if (loggedIn) {

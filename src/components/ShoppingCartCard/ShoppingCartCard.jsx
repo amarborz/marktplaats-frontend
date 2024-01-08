@@ -11,6 +11,7 @@ const ShoppingCartCard = ({ item, resetCheckout }) => {
 	const userId = localStorage.getItem('id')
 	const [quantity, setQuantity] = useState(item.quantity)
 	console.log(item)
+	console.log(quantity)
 
 	const deleteItem = (itemId) => {
 		fetch(`${process.env.REACT_APP_PATH}api/item/${itemId}`, {

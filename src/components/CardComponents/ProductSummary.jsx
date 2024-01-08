@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Card } from 'react-bootstrap'
-
 import styles from './productSummary.module.css'
 
 const ProductSummary = ({ product }) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, Carousel, CarouselItem, Image } from 'react-bootstrap'
+import {  Carousel, CarouselItem, Image } from 'react-bootstrap'
 
 import noImage from '../../utils/images/noimage.jpg'
 

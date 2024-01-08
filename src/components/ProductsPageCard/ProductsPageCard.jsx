@@ -15,8 +15,8 @@ const ProductCard = ({ product, loggedIn }) => {
 	console.log(inCart)
 
 	const addToCart = () => {
-		console.log('loggedIn: ', loggedIn)
-		if (loggedIn) {
+		console.log('loggedIn: ', userId, loggedIn)
+		if (userId) {
 			fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
 				method: 'GET',
 				headers: {

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -73,7 +72,7 @@ const Login = () => {
 					<Form.Label>Password</Form.Label>
 					<Form.Control
 						required
-						type="text"
+						type="password"
 						placeholder="Enter password"
 						name="password"
 						value={password}

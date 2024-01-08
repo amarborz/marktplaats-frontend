@@ -19,7 +19,8 @@ const NavbarHeader = () => {
 
 	const [searchName, setSearchName] = useState('')
 
-	const searchFunction = () => {
+	const searchFunction = (e) => {
+		e.preventDefault()
 		let url = searchName === undefined ? '/products' : `/products/${searchName}`
 		console.log('moving to', `/products/${searchName}`)
 		navigate(url)
@@ -34,8 +35,8 @@ const NavbarHeader = () => {
 	const options = [
 		// { value: 'choose category', label: 'Choose category', isDisabled: true },
 		{ value: 'electronics', label: 'Electronics' },
-		{ value: 'book', label: 'Books' },
-		{ value: 'clothing', label: 'Clothes' },
+		{ value: 'books', label: 'Books' },
+		{ value: 'clothing', label: 'Clothing' },
 		{ value: 'furniture', label: 'Furniture' },
 		{ value: 'sport', label: 'Sport' },
 		{ value: 'games', label: 'Games' },
@@ -66,7 +67,13 @@ const NavbarHeader = () => {
 							onChange={(e) => setSearchName(e.target.value)}
 							value={searchName}
 						/>
-						<Button variant="outline-primary" onClick={searchFunction}>
+						<Button
+							variant="outline-primary"
+							type="submit"
+							onClick={(e) => {
+								searchFunction(e)
+							}}
+						>
 							Search
 						</Button>
 					</Form>

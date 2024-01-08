@@ -2,23 +2,21 @@ import React, { useState } from 'react'
 
 import { Card } from 'react-bootstrap'
 
-import laptop from '../../utils/images/laptop.jpg'
-import clothes from '../../utils/images/clothes.webp'
-import books from '../../utils/images/books.webp'
-import electronics from '../../utils/images/electronics.webp'
 import noImage from '../../utils/images/noimage.jpg'
 
 import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 
 import { LinkContainer } from 'react-router-bootstrap'
 
-const ProductCard = ({ product, loggedIn }) => {
+const ProductCard = ({ product, loggedIn, setWishlist }) => {
 	console.log(product)
 	const userId = localStorage.getItem('id')
 	const [inCart, setInCart] = useState(false)
+	console.log(inCart)
+
 	const addToCart = () => {
-		console.log('loggedIn: ', loggedIn)
-		if (loggedIn) {
+		console.log('loggedIn: ', userId, loggedIn)
+		if (userId) {
 			fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
 				method: 'GET',
 				headers: {
@@ -59,23 +57,24 @@ const ProductCard = ({ product, loggedIn }) => {
 		const newProductId = product.id
 		const alreadyInList = existingData.some((item) => item.id === newProductId)
 
-		if (!alreadyInList) existingData.push(product)
+		if (!alreadyInList) {
+			existingData.push(product)
+			localStorage.setItem(storageKey, JSON.stringify(existingData))
+			alert('Added to your wishlist!')
+			return
+		}
 
-		localStorage.setItem(storageKey, JSON.stringify(existingData))
-	}
-
-	let img = laptop
-	if (product.productType === 'Electronica') {
-		img = electronics
-	} else if (product.productType === 'Kleding') {
-		img = clothes
-	} else if (['boeken', 'books', 'Books'].includes(product.productType)) {
-		img = books
+		if (alreadyInList) {
+			const filteredList = existingData.filter((item) => item.id !== product.id)
+			localStorage.setItem(storageKey, JSON.stringify(filteredList))
+			setWishlist(filteredList)
+			alert('Removed from your wishlist!')
+		}
 	}
 
 	return (
 		<Card
-			style={{ maxWidth: '50rem' }}
+			style={{ width: '50rem' }}
 			className="border-start-0 border-end-0 border-bottom-0 rounded-0 p-4"
 		>
 			<div style={{ display: 'flex' }}>
@@ -103,7 +102,9 @@ const ProductCard = ({ product, loggedIn }) => {
 						</Card.Subtitle>
 					</div>
 					<div style={{ width: '20%', justifyContent: 'center' }}>
-						<Card.Text style={{ color: 'red' }}>${product.price}</Card.Text>
+						<Card.Text style={{ color: 'red', fontWeight: 700, fontSize: 20 }}>
+							${product.price}
+						</Card.Text>
 						{userId && (
 							<button
 								id="addToCart"

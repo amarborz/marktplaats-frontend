@@ -8,15 +8,15 @@ import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 
 import { LinkContainer } from 'react-router-bootstrap'
 
-const ProductCard = ({ product, loggedIn }) => {
+const ProductCard = ({ product, loggedIn, setWishlist }) => {
 	console.log(product)
 	const userId = localStorage.getItem('id')
 	const [inCart, setInCart] = useState(false)
 	console.log(inCart)
 
 	const addToCart = () => {
-		console.log('loggedIn: ', loggedIn)
-		if (loggedIn) {
+		console.log('loggedIn: ', userId, loggedIn)
+		if (userId) {
 			fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
 				method: 'GET',
 				headers: {
@@ -57,9 +57,19 @@ const ProductCard = ({ product, loggedIn }) => {
 		const newProductId = product.id
 		const alreadyInList = existingData.some((item) => item.id === newProductId)
 
-		if (!alreadyInList) existingData.push(product)
+		if (!alreadyInList) {
+			existingData.push(product)
+			localStorage.setItem(storageKey, JSON.stringify(existingData))
+			alert('Added to your wishlist!')
+			return
+		}
 
-		localStorage.setItem(storageKey, JSON.stringify(existingData))
+		if (alreadyInList) {
+			const filteredList = existingData.filter((item) => item.id !== product.id)
+			localStorage.setItem(storageKey, JSON.stringify(filteredList))
+			setWishlist(filteredList)
+			alert('Removed from your wishlist!')
+		}
 	}
 
 	return (

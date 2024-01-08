@@ -22,7 +22,11 @@ const WishlistProducts = () => {
 			{!isLoading && wishlist.length > 0 && (
 				<div style={{ width: '50rem' }}>
 					{wishlist.map((product) => (
-						<ProductsPageCard key={product.id} product={product} />
+						<ProductsPageCard
+							key={product.id}
+							product={product}
+							setWishlist={setWishlist}
+						/>
 					))}
 				</div>
 			)}

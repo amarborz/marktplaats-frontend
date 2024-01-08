@@ -15,7 +15,7 @@ const categories = [
 	{ name: 'Electronics', image: electronics },
 	{ name: 'Clothing', image: clothes },
 	{ name: 'Books', image: books },
-	{ name: 'Sports', image: sports },
+	{ name: 'Sport', image: sports },
 	{ name: 'Furniture', image: furniture },
 	{ name: 'Games', image: games },
 ]

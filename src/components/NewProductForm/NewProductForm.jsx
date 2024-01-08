@@ -218,7 +218,7 @@ const NewProductForm = () => {
 					>
 						<option value="">Select Type</option>
 						<option value="electronics">Electronics</option>
-						<option value="clothes">Clothes</option>
+						<option value="clothing">Clothing</option>
 						<option value="books">Books</option>
 						<option value="furniture">Furniture</option>
 						<option value="sport">Sport</option>

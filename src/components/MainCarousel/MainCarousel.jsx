@@ -19,7 +19,7 @@ const carouselData = [
 		image: electronics,
 	},
 	{ name: 'Books', description: 'Read the newest books!', image: books },
-	{ name: 'Clothes', description: 'Buy stylish clothes!', image: clothes },
+	{ name: 'Clothing', description: 'Buy stylish clothes!', image: clothes },
 	{ name: 'Sports', description: 'Ready for sport!', image: sports },
 	{ name: 'Furniture', description: 'Decorate your home!', image: furniture },
 ]

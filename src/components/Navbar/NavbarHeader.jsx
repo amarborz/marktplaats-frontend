@@ -36,7 +36,7 @@ const NavbarHeader = () => {
 		// { value: 'choose category', label: 'Choose category', isDisabled: true },
 		{ value: 'electronics', label: 'Electronics' },
 		{ value: 'books', label: 'Books' },
-		{ value: 'clothing', label: 'Clothes' },
+		{ value: 'clothing', label: 'Clothing' },
 		{ value: 'furniture', label: 'Furniture' },
 		{ value: 'sport', label: 'Sport' },
 		{ value: 'games', label: 'Games' },

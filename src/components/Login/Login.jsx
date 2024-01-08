@@ -72,7 +72,7 @@ const Login = () => {
 					<Form.Label>Password</Form.Label>
 					<Form.Control
 						required
-						type="text"
+						type="password"
 						placeholder="Enter password"
 						name="password"
 						value={password}

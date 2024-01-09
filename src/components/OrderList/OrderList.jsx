@@ -82,7 +82,7 @@ const OrderList = () => {
 								</Col>
 							</Row>
 							<Row>
-								<Col xs={12} md={6}>
+								<Col xs={12} md={12}>
 									<OrderCard orderedItem={orderedItem} />
 								</Col>
 							</Row>

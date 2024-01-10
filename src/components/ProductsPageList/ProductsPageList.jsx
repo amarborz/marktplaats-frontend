@@ -69,25 +69,13 @@ const ProductsPageList = ({ searchName }) => {
 									}
 									return { ...product, color }
 								})
-
 								setProducts(updatedProducts)
 								setLoggedIn(true)
 								setIsLoading(false)
 							})
+
 					})
-			})
-			.catch((error) => {
-				console.log('catching the error')
-				fetch(`${process.env.REACT_APP_PATH}api${searchName}`, {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						// 'Authorization': localStorage.getItem("token"),
-						// 'userId': userId,
-					},
-				})
-					.then((res) => res.json())
-					.then((productData) => {
+					.catch((error) => {
 						setProducts(productData)
 						setLoggedIn(false)
 					})

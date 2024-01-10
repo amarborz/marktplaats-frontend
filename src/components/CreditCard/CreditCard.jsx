@@ -8,6 +8,14 @@ const CreditCard = () => {
 	const location = useLocation()
 	const searchParams = new URLSearchParams(location.search)
 	const totalPrice = searchParams.get('totalPrice')
+	const deliveryDate = searchParams.get('deliveryDate')
+
+	const today = new Date();
+	const year = today.getFullYear();
+	const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+	const day = today.getDate().toString().padStart(2, '0');
+
+	const formattedDateToday = `${year}-${month}-${day}`;
 
 	const [cardNumber, setCardNumber] = useState('')
 	const [cardHolder, setCardHolder] = useState('Name')
@@ -61,14 +69,13 @@ const CreditCard = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(e)
 
 		let user_id = localStorage.getItem('id')
 		let order = {
 			totalPayment: totalPrice,
 			deliveryAddress: 'Straat 1',
-			deliveryDate: '2023-12-18',
-			paymentDate: '2023-12-15',
+			deliveryDate: deliveryDate,
+			paymentDate: formattedDateToday,
 			paymentMethod: 'Credit Card',
 			status: 'Processing',
 		}
@@ -81,7 +88,6 @@ const CreditCard = () => {
 			},
 			body: JSON.stringify(order),
 		}).then((res) => {
-			console.log(res)
 			if (res.ok) {
 				fetch(`${process.env.REACT_APP_PATH}api/item/empty_cart/${user_id}`, {
 					method: 'DELETE',

@@ -73,10 +73,9 @@ const ProductsPageList = ({ searchName }) => {
 								setLoggedIn(true)
 								setIsLoading(false)
 							})
-
 					})
 					.catch((error) => {
-						setProducts(productData)
+						console.log(error)
 						setLoggedIn(false)
 					})
 			})

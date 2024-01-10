@@ -9,13 +9,10 @@ import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 import { LinkContainer } from 'react-router-bootstrap'
 
 const ProductCard = ({ product, loggedIn, setWishlist }) => {
-	console.log(product)
 	const userId = localStorage.getItem('id')
 	const [inCart, setInCart] = useState(false)
-	console.log(inCart)
 
 	const addToCart = () => {
-		console.log('loggedIn: ', userId, loggedIn)
 		if (userId) {
 			fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
 				method: 'GET',
@@ -46,6 +43,7 @@ const ProductCard = ({ product, loggedIn, setWishlist }) => {
 				})
 			product.color = 'grey'
 			setInCart(true)
+			console.log(inCart)
 		}
 	}
 

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Spinner } from 'react-bootstrap'
 import OrderCard from '../OrderCard/OrderCard'
 
 const OrderList = () => {
 	const [orderedItems, setOrderedItems] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
 	const userId = localStorage.getItem('id')
+
 	useEffect(() => {
 		// Fetch user's order data
 		fetch(`${process.env.REACT_APP_PATH}api/order/by_user/${userId}`, {
@@ -49,6 +51,7 @@ const OrderList = () => {
 							accumulatedItems.push(...updatedItems)
 						})
 						setOrderedItems(accumulatedItems)
+						setIsLoading(false)
 					})
 					.catch((error) => {
 						console.error('Error fetching item data:', error)
@@ -61,6 +64,8 @@ const OrderList = () => {
 
 	return (
 		<Container className="d-flex align-items-center justify-content-center mt-5">
+			{isLoading && <Spinner animation="border" role="status"></Spinner>}
+			{!isLoading && orderedItems.length === 0 && <h2>You have no orders.</h2>}
 			<Row className="mt-5">
 				{orderedItems.map((orderedItem, index) => (
 					<Col key={orderedItem.itemId} xs={12}>

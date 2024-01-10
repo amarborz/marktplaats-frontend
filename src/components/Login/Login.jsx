@@ -24,7 +24,6 @@ const Login = () => {
 			password: password,
 		}
 
-		console.log(loginRequest)
 		fetch(`${process.env.REACT_APP_PATH}auth/login`, {
 			method: 'POST',
 			headers: {
@@ -34,14 +33,11 @@ const Login = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data)
 				if (data.success) {
 					// Save token and user details in localStorage
 					localStorage.setItem('token', data.token)
 					localStorage.setItem('name', data.name)
 					localStorage.setItem('id', data.id)
-					console.log('Opgeslagen in local storage')
-					console.log(data.token)
 					navigate(`/`)
 				}
 			})

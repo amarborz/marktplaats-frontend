@@ -19,14 +19,7 @@ const ProductsPageList = ({ searchName }) => {
 	const searchParams = new URLSearchParams(location.search)
 	const category = searchParams.get('category')
 
-	console.log('category: ', category)
-	console.log(products)
-
 	useEffect(() => {
-		// console.log(userId)
-		// Fetch user's shopping cart data
-		// console.log(localStorage.getItem("token"))
-		// console.log("Trying to access shopping cart data")
 		fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
 			method: 'GET',
 			headers: {
@@ -36,15 +29,9 @@ const ProductsPageList = ({ searchName }) => {
 			},
 		})
 			.then((res) => {
-				// console.log("res1: ", res)
-				// if (!res.ok) {
-				// 	throw new Error("response was not ok")
-				// }
 				return res.json()
 			})
 			.then((shoppingCartData) => {
-				// Fetch item data
-				// console.log(shoppingCartData)
 				fetch(
 					`${process.env.REACT_APP_PATH}api/item/by_shopping_cart/${shoppingCartData.id}`,
 					{
@@ -57,7 +44,6 @@ const ProductsPageList = ({ searchName }) => {
 					}
 				)
 					.then((res) => {
-						// console.log("res2: ", res)
 						return res.json()
 					})
 					.then((itemData) => {
@@ -71,7 +57,6 @@ const ProductsPageList = ({ searchName }) => {
 							},
 						})
 							.then((res) => {
-								// console.log(res)
 								return res.json()
 							})
 							.then((productData) => {
@@ -88,7 +73,6 @@ const ProductsPageList = ({ searchName }) => {
 								setProducts(updatedProducts)
 								setLoggedIn(true)
 								setIsLoading(false)
-								// console.log("loggedIn set to true: ", loggedIn)
 							})
 					})
 			})
@@ -108,7 +92,6 @@ const ProductsPageList = ({ searchName }) => {
 						setLoggedIn(false)
 					})
 			})
-		console.log('loggedIn: ', loggedIn)
 	}, [searchName, loggedIn, userId])
 
 	const incrementHandler = () => {

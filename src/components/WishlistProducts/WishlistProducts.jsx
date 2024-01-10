@@ -17,10 +17,11 @@ const WishlistProducts = () => {
 		<Container className="d-flex justify-content-center align-items-center">
 			{isLoading && <Spinner animation="border" role="status"></Spinner>}
 			{!isLoading && wishlist.length === 0 && (
-				<h3>You have no products in your wishlist.</h3>
+				<h2>You have no products in your wishlist.</h2>
 			)}
 			{!isLoading && wishlist.length > 0 && (
 				<div style={{ width: '50rem' }}>
+					<h2 className="text-center">Your Wishlist:</h2>
 					{wishlist.map((product) => (
 						<ProductsPageCard
 							key={product.id}

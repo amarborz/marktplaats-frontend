@@ -16,7 +16,6 @@ const ShoppingCartList = () => {
 
 	useEffect(() => {
 		// Fetch user's shopping cart data
-		console.log('Fetching shopping cart data...')
 		fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
 			method: 'GET',
 			headers: {
@@ -47,33 +46,38 @@ const ShoppingCartList = () => {
 			})
 	}, [resetCount, userId])
 	return (
-		<div style={{ display: 'flex' }}>
-			{loading && <Spinner animation="border" className="m-auto" />}
-			{cartItems.length === 0 && !loading && (
-				<h4 className="m-auto">There are no items in your shopping cart.</h4>
+		<>
+			{!loading && cartItems.length > 0 && (
+				<h2 className="text-center">Your Shopping Cart:</h2>
 			)}
-			{cartItems.length > 0 && (
-				<>
-					<div style={{ width: '10%' }}></div>
-					<div style={{ width: '60%' }}>
-						<Container className="d-flex align-items-center justify-content-center">
-							<div>
-								{cartItems.map((item) => (
-									<ShoppingCartCard
-										key={item.id}
-										item={item}
-										resetCheckout={resetCheckout}
-									/>
-								))}
-							</div>
-						</Container>
-					</div>
-					<div style={{ width: '30%' }}>
-						<Checkout cartItems={cartItems} />
-					</div>
-				</>
-			)}
-		</div>
+			<div style={{ display: 'flex' }}>
+				{loading && <Spinner animation="border" className="m-auto" />}
+				{cartItems.length === 0 && !loading && (
+					<h2 className="m-auto">There are no items in your shopping cart.</h2>
+				)}
+				{cartItems.length > 0 && (
+					<>
+						<div style={{ width: '10%' }}></div>
+						<div style={{ width: '60%' }}>
+							<Container className="d-flex align-items-center justify-content-center">
+								<div>
+									{cartItems.map((item, index) => (
+										<ShoppingCartCard
+											key={index}
+											item={item}
+											resetCheckout={resetCheckout}
+										/>
+									))}
+								</div>
+							</Container>
+						</div>
+						<div style={{ width: '30%' }}>
+							<Checkout cartItems={cartItems} />
+						</div>
+					</>
+				)}
+			</div>
+		</>
 	)
 }
 

@@ -6,7 +6,6 @@ const ProductSummary = ({ product }) => {
 	const userId = localStorage.getItem('id')
 
 	const addToCart = () => {
-		console.log('loggedIn: ', userId)
 		if (userId) {
 			fetch(`${process.env.REACT_APP_PATH}api/shoppingcart/by_user/${userId}`, {
 				method: 'GET',
@@ -46,7 +45,10 @@ const ProductSummary = ({ product }) => {
 			<h4>{product.productName}</h4>
 
 			<p className={styles.price}>${product.price}</p>
-			<h6>Category: {product.productType}</h6>
+			<h6>
+				Category: {product.productType[0].toUpperCase()}
+				{product.productType.slice(1)}
+			</h6>
 			<h6>Size: {product.size}</h6>
 			<h6>Weight: {product.weight}</h6>
 

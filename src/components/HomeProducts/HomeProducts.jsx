@@ -9,12 +9,9 @@ const HomeProducts = () => {
 	const [latestProducts, setLatestProducts] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 
-	console.log(latestProducts)
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				console.log('path: ', process.env.REACT_APP_PATH)
 				const response = await fetch(
 					`${process.env.REACT_APP_PATH}api/product`,
 					{

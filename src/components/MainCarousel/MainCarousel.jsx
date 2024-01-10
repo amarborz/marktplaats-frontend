@@ -29,7 +29,6 @@ const MainCarousel = () => {
 
 	const handleCategoryClick = (category) => {
 		let url = `/products?category=${category}`
-		console.log('This is my url: ', url)
 		navigate(url)
 	}
 

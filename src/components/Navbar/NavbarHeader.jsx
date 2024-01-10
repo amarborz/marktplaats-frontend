@@ -22,7 +22,6 @@ const NavbarHeader = () => {
 	const searchFunction = (e) => {
 		e.preventDefault()
 		let url = searchName === undefined ? '/products' : `/products/${searchName}`
-		console.log('moving to', `/products/${searchName}`)
 		navigate(url)
 	}
 
@@ -44,7 +43,6 @@ const NavbarHeader = () => {
 
 	const handleSelectChange = (category) => {
 		let url = `/products?category=${category.value}`
-		console.log('This is my url: ', url)
 		navigate(url)
 	}
 

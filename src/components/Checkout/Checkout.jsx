@@ -25,6 +25,7 @@ const Checkout = ({ cartItems }) => {
 
 		setTotalAmount(newTotalAmount)
 		setTotalPrice(newTotalPrice)
+		console.log(newTotalPrice)
 	}, [cartItems])
 
 	return (

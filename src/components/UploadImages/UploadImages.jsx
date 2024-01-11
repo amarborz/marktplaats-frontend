@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Form } from 'react-bootstrap'
 
-const UploadImages = ({ files, handleFileChange, uploadedUrls }) => {
+const UploadImages = ({ files, handleFileChange }) => {
 	return (
 		<div>
 			<h4 style={{ marginTop: 30 }}>Upload up to 10 images.</h4>

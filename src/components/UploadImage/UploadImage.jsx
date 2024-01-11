@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Form } from 'react-bootstrap'
 
-const UploadImage = ({ files, handleFileChange, uploadedUrls }) => {
+const UploadImage = ({ files, handleFileChange }) => {
 	// const [files, setFiles] = useState(new Array(10).fill(null))
 	// const [uploadedUrls, setUploadedUrls] = useState([])
 
@@ -57,7 +57,7 @@ const UploadImage = ({ files, handleFileChange, uploadedUrls }) => {
 				</Form.Group>
 			))}
 			{/* <button onClick={sendToAzure}>Upload All</button> */}
-			{uploadedUrls.length > 0 && (
+			{/* {uploadedUrls.length > 0 && (
 				<div>
 					<h3>Uploaded Image URLs:</h3>
 					<ul>
@@ -70,7 +70,7 @@ const UploadImage = ({ files, handleFileChange, uploadedUrls }) => {
 						))}
 					</ul>
 				</div>
-			)}
+			)} */}
 		</div>
 	)
 }

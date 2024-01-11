@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-import UploadImages from '../UploadImages/UploadImages'
+// import UploadImages from '../UploadImages/UploadImages'
+import UploadImage from '../UploadImage/UploadImage'
 
 import { Alert, Button, Container, Form, Spinner } from 'react-bootstrap'
 
@@ -19,7 +20,6 @@ const NewProductForm = () => {
 	})
 
 	const [files, setFiles] = useState(new Array(10).fill(null))
-	const [uploadedUrls, setUploadedUrls] = useState([])
 
 	const [submitStatus, setSubmitStatus] = useState({
 		submitted: false,
@@ -29,15 +29,36 @@ const NewProductForm = () => {
 
 	const handleFileChange = (event, index) => {
 		const newFiles = [...files]
-		console.log(event.target.value)
-		newFiles[index] = event.target.value
-		setUploadedUrls([...uploadedUrls, event.target.value])
+		console.log(event.target.files[0])
+		newFiles[index] = event.target.files[0]
+		// setUploadedUrls([...uploadedUrls, event.target.value])
 		setFiles(newFiles)
 		console.log(files)
 	}
 
 	const handleChange = (e) => {
 		setProduct({ ...product, [e.target.name]: e.target.value })
+	}
+
+	const uploadFiles = async (data) => {
+		const formData = new FormData()
+
+		files.forEach((file, index) => {
+			formData.append(`file`, file)
+		})
+
+		try {
+			const response = await fetch(
+				`${process.env.REACT_APP_PATH}api/product/upload_files/${data.id}`,
+				{
+					method: 'POST',
+					body: formData,
+				}
+			)
+			console.log(response)
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	const handleSubmit = async () => {
@@ -49,7 +70,8 @@ const NewProductForm = () => {
 		}, 8000)
 
 		console.log('Product Details:', product)
-		const readyProduct = { ...product, foto: uploadedUrls }
+		// const readyProduct = { ...product, foto: uploadedUrls }
+		const readyProduct = { ...product }
 		console.log(readyProduct)
 
 		try {
@@ -77,6 +99,7 @@ const NewProductForm = () => {
 				message: 'Product added successfully!',
 			})
 			console.log('Product Added:', data)
+			return data
 		} catch (error) {
 			setSubmitStatus({
 				submitted: true,
@@ -89,7 +112,9 @@ const NewProductForm = () => {
 	const handleSubmitAll = async (e) => {
 		e.preventDefault()
 		console.log(files)
-		handleSubmit()
+		const productData = await handleSubmit()
+		console.log(productData)
+		uploadFiles(productData)
 	}
 
 	// const renderAdditionalInput = () => {
@@ -227,11 +252,7 @@ const NewProductForm = () => {
 				</Form.Group>
 				{/* {renderAdditionalInput()} */}
 				<Form.Group>
-					<UploadImages
-						files={files}
-						handleFileChange={handleFileChange}
-						uploadedUrls={uploadedUrls}
-					/>
+					<UploadImage files={files} handleFileChange={handleFileChange} />
 				</Form.Group>
 				<Button variant="primary" type="submit" className="mb-5">
 					Add Product

@@ -9,10 +9,10 @@ import { FaCartShopping, FaHeart } from 'react-icons/fa6'
 import { LinkContainer } from 'react-router-bootstrap'
 
 const ProductCard = ({ product, loggedIn, setWishlist }) => {
-	console.log(product)
+	// console.log(product)
 	const userId = localStorage.getItem('id')
 	const [inCart, setInCart] = useState(false)
-	console.log(inCart)
+	// console.log(inCart)
 
 	const addToCart = () => {
 		console.log('loggedIn: ', userId, loggedIn)

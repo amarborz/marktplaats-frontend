@@ -19,8 +19,8 @@ const ProductsPageList = ({ searchName }) => {
 	const searchParams = new URLSearchParams(location.search)
 	const category = searchParams.get('category')
 
-	console.log('category: ', category)
-	console.log(products)
+	// console.log('category: ', category)
+	// console.log(products)
 
 	useEffect(() => {
 		// get products
